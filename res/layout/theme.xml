@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <include layout="@layout/back_part" />
+    </LinearLayout>
+	
+	<!-- baselineAligned属性不明 -->
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp" 
+        android:baselineAligned="false">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="centerInside"
+                android:src="@drawable/simple"
+                tools:ignore="ContentDescription" />
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/button_corners_all"
+                android:text="@string/simple" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="centerInside"
+                android:src="@drawable/colorful"
+                tools:ignore="ContentDescription" />
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/button_corners_all"
+                android:text="@string/colorful" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

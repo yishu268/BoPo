@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <LinearLayout 
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content">
+	    
+	    <include layout="@layout/back_part"/>
+	</LinearLayout>
+	
+	<LinearLayout 
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:padding="20dp"
+	    android:orientation="vertical">
+		
+		<Button
+		    android:id="@+id/stat_note"
+		    android:onClick="onClick_Stat_Node"
+		    android:layout_width="fill_parent"
+		    android:layout_height="45dp"
+		    android:background="@drawable/button_corners_top"
+		    android:text="@string/stat_node"/>
+		
+		<Button
+		    android:id="@+id/stat_review"
+		    android:onClick="onClick_Stat_Review"
+		    android:layout_width="fill_parent"
+		    android:layout_height="45dp"
+		    android:background="@drawable/button_corners_null"
+		    android:text="@string/stat_review"/>
+	
+		<Button
+		    android:id="@+id/stat_line"
+		    android:onClick="onClick_Stat_Line"
+		    android:layout_width="fill_parent"
+		    android:layout_height="45dp"
+		    android:background="@drawable/button_corners_bottom"
+		    android:text="@string/stat_line"/>
+	</LinearLayout>
+</LinearLayout>

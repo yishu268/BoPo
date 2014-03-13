@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+	<LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/logo"
+                tools:ignore="ContentDescription" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:orientation="vertical" >
+
+            <Button
+                android:id="@+id/stat"
+                android:onClick="onClick_Stat"
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/button_corners_top"
+                android:text="@string/stat" />
+
+            <Button
+                android:id="@+id/theme"
+                android:onClick="onClick_Theme"
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/button_corners_null"
+                android:text="@string/theme" />
+
+            <Button
+                android:id="@+id/about"
+                android:onClick="onClick_About"
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/button_corners_null"
+                android:text="@string/about" />
+
+            <Button
+                android:id="@+id/logout"
+                android:onClick="onClick_Logout"
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/button_corners_bottom"
+                android:text="@string/logout" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" >
+
+        <include layout="@layout/bottom_part" />
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="ruanko.activity.bopo"
+    android:versionCode="1"
+    android:versionName="1.0" xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="18" 
+        tools:ignore="OldTargetApi"/>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/icon"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="ruanko.activity.bopo.Start"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Login"       android:launchMode="singleTask"/>
+        <activity android:name=".Register"/>
+        <activity android:name=".Find_Password"/>
+        
+        <activity android:name=".Line"        android:launchMode="singleTask"/>
+        <activity android:name=".Info"        android:launchMode="singleTask"/>
+        <activity android:name=".Info_Change"/>
+        <activity android:name=".Info_Head"/>
+        <activity android:name=".Node_View"   android:launchMode="singleTask"/>
+        <activity android:name=".Node_Add"/>
+        <activity android:name=".Node_Change"/>
+        
+        <activity android:name=".Review_Add"/>
+        
+        <activity android:name=".Friend"      android:launchMode="singleTask"/>
+        <activity android:name=".Friend_Add"      android:launchMode="singleTask"/>
+        <activity android:name=".Friend_Add_Name"/>
+        <activity android:name=".Friend_Add_Condition"/>
+        <activity android:name=".Friend_Add_Result"/>
+        
+        <activity android:name=".Cross"       android:launchMode="singleTask"/>
+        
+        <activity android:name=".Set"         android:launchMode="singleTask"/>
+        <activity android:name=".Stat"        android:launchMode="singleTask"/>
+        <activity android:name=".Stat_Node"/>
+        <activity android:name=".Stat_Review"/>
+        <activity android:name=".Stat_Line"/>
+        <activity android:name=".Theme"/>
+        <activity android:name=".About"/>
+    </application>
+
+</manifest>

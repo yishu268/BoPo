@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+    
+    <LinearLayout
+		android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:background="#F4F4F4">
+        
+        <Button
+            android:id="@+id/line"
+            android:onClick="onClick_Line"
+	 		android:layout_width="fill_parent"
+	    	android:layout_height="50dp"
+	    	android:layout_weight="1"
+	    	android:text="@string/line"
+	    	android:background="@null"/>
+		
+		<Button
+		    android:id="@+id/friend"
+		    android:onClick="onClick_Friend"
+	    	android:layout_width="fill_parent"
+	    	android:layout_height="50dp"
+	    	android:layout_weight="1"
+	    	android:text="@string/friend"
+	    	android:background="@null"/>
+		
+		<Button
+		    android:id="@+id/cross"
+		    android:onClick="onClick_Cross"
+	    	android:layout_width="fill_parent"
+	    	android:layout_height="50dp"
+	    	android:layout_weight="1"
+	    	android:text="@string/cross"
+	    	android:background="@null"/>
+		
+		<Button
+		    android:id="@+id/set"
+		    android:onClick="onClick_Set"
+	   		android:layout_width="fill_parent"
+	    	android:layout_height="50dp"
+	    	android:layout_weight="1"
+	    	android:text="@string/set"
+	    	android:background="@null"/>
+	</LinearLayout>
+	
+	<View
+        android:layout_width="fill_parent"    
+    	android:layout_height="1px"
+    	android:background="#AAAAAA"/>
+</RelativeLayout>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:padding="20dp"
+        android:orientation="vertical">
+        <TextView 
+            android:layout_width="wrap_content"
+	       	android:layout_height="wrap_content"
+	       	android:layout_gravity="left"
+	       	android:text="@string/input_cross_time"
+	        android:layout_marginBottom="10dp"/>
+	    <DatePicker
+        	android:id="@+id/datech"
+        	android:calendarViewShown="false"
+        	android:layout_width="match_parent"
+        	android:layout_height="wrap_content"/>
+		<Button
+	            android:id="@+id/Go"
+	            android:onClick="onClick_Go"
+	            android:layout_width="fill_parent"
+	            android:layout_height="45dp"
+	            android:layout_marginTop="20dp"
+	            android:background="@drawable/button_corners_all"
+	            android:text="@string/go"/>
+    </LinearLayout>   
+    
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" >
+        <include layout="@layout/bottom_part" />
+    </RelativeLayout>
+</RelativeLayout>
