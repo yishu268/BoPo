@@ -5,27 +5,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-//成长信息界面（Node_View）
-public class Node_View extends Activity{
+//好友成长记录界面（Friend_Node）
+public class Friend_Node extends Activity{
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.node_view);
+		setContentView(R.layout.friend_node);
 	}
 	//返回按钮点击事件
 	public void onClick_Back(View view){
-		finish();
-	}
-	//编辑按钮点击事件
-	public void onClick_Edit(View view){
-		Intent intent = new Intent(this,Node_Change.class);
-		startActivity(intent);
-	}
-	//删除按钮点击事件
-	public void onClick_Delete(View view){
-		Intent intent = new Intent(this,Line.class);
-		startActivity(intent);
 		finish();
 	}
 	//评论按钮点击事件

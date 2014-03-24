@@ -2,23 +2,24 @@ package ruanko.model.bopo;
 
 public class Friend_Data {
 
-	private String number = null;
+	private int id;
 	private String name = null;
 	private String remark = null;
 	
 	public Friend_Data(){
-		number = "";
+		id = 0;
 		name = "";
 		remark = "";
 	}
 
-	public String getNumber() {
-		return number;
+	public int getId() {
+		return id;
 	}
 
-	public void setNumber(String number) {
-		this.number = number;
+	public void setId(int id) {
+		this.id = id;
 	}
+
 
 	public String getName() {
 		return name;

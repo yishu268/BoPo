@@ -15,8 +15,6 @@ public class Friend_Add_Condition extends Activity{
 	}
 	//返回按钮点击事件
 	public void onClick_Back(View view){
-		Intent intent = new Intent(this,Friend_Add.class);
-		startActivity(intent);
 		finish();
 	}
 	//搜索按钮点击事件

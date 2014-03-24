@@ -30,8 +30,6 @@ public class Stat extends Activity{
 	}
 	//返回按钮点击事件
 	public void onClick_Back(View view){
-		Intent intent = new Intent(this,Set.class);
-		startActivity(intent);
 		finish();
 	}
 }

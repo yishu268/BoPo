@@ -64,9 +64,11 @@
     <string name="condition_add">按条件搜索</string>
     <!-- friend_add_name -->
     <string name="search_name">请输入对方账号</string>
-    <string name="search">搜素</string>
+    <string name="search">搜索</string>
     <!-- friend_add_result -->
     <string name="back_friend">返回好友列表</string>
+    <!-- friend_info -->
+    <string name="add_friend">加为好友</string>
     
     <!-- cross -->
     <string name="input_cross_time">请输入要穿越的时间点</string>

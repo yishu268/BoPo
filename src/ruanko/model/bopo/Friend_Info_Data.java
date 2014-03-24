@@ -1,7 +1,14 @@
 package ruanko.model.bopo;
 
-//用户信息数据实体类
-public class Info_Data {
+import java.io.Serializable;
+
+//好友信息实体类
+public class Friend_Info_Data implements Serializable{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int id;
 	private String name = null;
 	private String password = null;
@@ -9,7 +16,7 @@ public class Info_Data {
 	private String node_id = null;
 	private String image= null;
 	
-	public Info_Data(){
+	public Friend_Info_Data(){
 		id = 0;
 		name = "";
 		password = "";
@@ -65,5 +72,4 @@ public class Info_Data {
 	public void setImage(String image) {
 		this.image = image;
 	}
-	
 }

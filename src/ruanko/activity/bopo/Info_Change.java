@@ -21,8 +21,6 @@ public class Info_Change extends Activity{
 	}
 	//返回按钮点击事件
 	public void onClick_Back(View view){
-		Intent intent = new Intent(this,Info.class);
-		startActivity(intent);
 		finish();
 	}
 }
