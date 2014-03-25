@@ -39,6 +39,7 @@
                 android:text="@string/user_name" />
 
             <TextView
+                android:id="@+id/name"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/test" />
@@ -57,6 +58,7 @@
                 android:text="@string/gender" />
 
             <TextView
+                android:id="@+id/gender"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/test" />
@@ -75,6 +77,7 @@
                 android:text="@string/location" />
 
             <TextView
+                android:id="@+id/location"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/test" />
@@ -90,9 +93,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
-                android:text="@string/phone" />
+                android:text="@string/mail" />
 
             <TextView
+                android:id="@+id/mail"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/test" />

@@ -89,7 +89,6 @@ public class Register extends Activity{
 		info_Data.setName(name.getText().toString());
 		info_Data.setPassword(password.getText().toString());
 		info_Data.setMail(mail.getText().toString());
-		info_Data.setNode_id(name.getText().toString());
 		info_Data.setImage(name.getText().toString());
 		return info_Data;		
 	}

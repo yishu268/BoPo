@@ -1,9 +1,6 @@
 package ruanko.dao.bopo;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import ruanko.model.bopo.Friend_Info_Data;
+import ruanko.model.bopo.Info_Data;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -11,38 +8,33 @@ import android.database.sqlite.SQLiteDatabase;
 
 public class Friend_Manage implements Friend_ManageDAO{
 
-	private Info_DBHelper helper = null;
+	private Info_DBHelper iHelper = null;
+	private Friend_DBHelper fHelper = null;
 	
 	/*
 	 * 构造方法
 	 */
 	public Friend_Manage(Context context) {
-		helper = new Info_DBHelper(context);
+		iHelper = new Info_DBHelper(context);
+		fHelper = new Friend_DBHelper(context);
 	}
-
+	/*
+	 * 按姓名搜索方法
+	 */
 	@Override
 	public int name(String name) {
 		if (name.equals("")||name == null) {
 			return 0;
 		}
-		List<Friend_Info_Data> list = null;
 		int id = 0;
 		//得到一个可读的数据库
-		SQLiteDatabase db = helper.getReadableDatabase();
+		SQLiteDatabase db = iHelper.getReadableDatabase();
 		//查询用户名对应的密码
 		String sql = "select *from info where name = ?";
 		String params[] = new String[]{name};
 		Cursor cursor = db.rawQuery(sql, params);
-		list = new ArrayList<Friend_Info_Data>();
 		//将查询到的数据设置到Friend_Info对应的属性中
 		while(cursor.moveToNext()){
-			Friend_Info_Data friend_Info_Data = new Friend_Info_Data();
-			friend_Info_Data.setId(cursor.getInt(0));
-			friend_Info_Data.setName(cursor.getString(1));
-			friend_Info_Data.setMail(cursor.getString(3));
-			friend_Info_Data.setNode_id(cursor.getString(4));
-			friend_Info_Data.setImage(cursor.getString(5));
-			list.add(friend_Info_Data);
 			id = cursor.getInt(0);
 		}
 		//关闭查询和数据库
@@ -50,5 +42,51 @@ public class Friend_Manage implements Friend_ManageDAO{
 		db.close();
 		return id;
 	}
-
+	/*
+	 * 添加好友方法
+	 */
+	@Override
+	public boolean add(Info_Data info_Data) {
+		//得到一个可写的数据库
+		String test = "remark";
+		SQLiteDatabase db = fHelper.getWritableDatabase();
+		if (info_Data!=null) {
+			//向好友数据库中插入好友信息
+			String sql = "insert into friend(name, remark) values "
+					+"(?,?)";
+			Object[] params = new Object[]{info_Data.getName(),test};
+			db.execSQL(sql, params);
+			db.close();
+			return true;
+		}else{
+			return false;
+		}
+	}
+	/*
+	 * 通过id获得信息的方法
+	 */
+	@Override
+	public Info_Data getId(int id) {
+		Info_Data info_Data = null;
+		if (id > 0) {
+			//得到一个可读的数据库
+			SQLiteDatabase db = iHelper.getReadableDatabase();
+			String sql = "select *from info where _id = ?";
+			String[] params = new String[]{String.valueOf(id)}; 
+			Cursor cursor = db.rawQuery(sql,params);
+			//利用cursor进行查询并将属性设置到info_Data对应的属性中
+			if (cursor.moveToNext()) {
+				info_Data = new Info_Data();
+				info_Data.setId(cursor.getInt(0));
+				info_Data.setName(cursor.getString(1));
+				info_Data.setMail(cursor.getString(3));
+				info_Data.setNode_id(cursor.getInt(4));
+				info_Data.setImage(cursor.getString(5));				
+			}
+			//关闭查询 关闭数据库
+			cursor.close();
+			db.close();
+		}
+		return info_Data;
+	}
 }

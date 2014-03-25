@@ -8,7 +8,7 @@ import ruanko.model.bopo.Info_Data;
 
 public class User_Manage implements User_ManageDAO{
 	
-	private Info_DBHelper helper = null;
+	private Info_DBHelper iHelper = null;
 	
 	private String pass = null;
 	
@@ -16,7 +16,7 @@ public class User_Manage implements User_ManageDAO{
 	 * 构造方法
 	 */
 	public User_Manage(Context context){
-		helper = new Info_DBHelper(context);
+		iHelper = new Info_DBHelper(context);
 	}
 	
 	/*
@@ -30,7 +30,7 @@ public class User_Manage implements User_ManageDAO{
 		}
 		
 		//得到一个可读的数据库
-		SQLiteDatabase db = helper.getReadableDatabase();
+		SQLiteDatabase db = iHelper.getReadableDatabase();
 		//查询用户名对应的密码
 		String sql = "select *from info where name = ?";
 		String params[] = new String[]{user};
@@ -55,16 +55,14 @@ public class User_Manage implements User_ManageDAO{
 	@Override
 	public boolean register(Info_Data info_Data) {
 		//得到一个可写的数据库
-		SQLiteDatabase db = helper.getWritableDatabase();
+		SQLiteDatabase db = iHelper.getWritableDatabase();
 		if (info_Data!=null) {
 			//
 			//向个人信息数据库中插入个人信息
-			String sql = "insert into info(name, password,"
-					+"mail, node_id, image) values "
-					+"(?,?,?,?,?)";
+			String sql = "insert into info(name, password, mail) values "
+					+"(?,?,?)";
 			Object[] params = new Object[]{info_Data.getName(),
-					info_Data.getPassword(),info_Data.getMail(),
-					info_Data.getNode_id(),info_Data.getImage()};
+					info_Data.getPassword(),info_Data.getMail()};
 			db.execSQL(sql, params);
 			//关闭数据库
 			db.close();

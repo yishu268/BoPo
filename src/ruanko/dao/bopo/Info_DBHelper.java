@@ -17,8 +17,10 @@ public class Info_DBHelper extends SQLiteOpenHelper{
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		//创建一张表 存储用户信息
-		String sql = "create table info("+"_id integer primary key autoincrement,"+"name text,"
-				+"password text,"+"mail text,"+"node_id text,"+"image text)";
+		String sql = "create table info("+"_id integer primary key autoincrement,"
+				+"name text,"+"password text,"+"mail text,"+"gender text,"
+				+"phone text,"+"image text,"+"location text,"+"age text,"
+				+"birth text,"+"node_id text)";
 		db.execSQL(sql);
 	}
 
