@@ -9,6 +9,7 @@ import ruanko.model.bopo.Info_Data;
 public class User_Manage implements User_ManageDAO{
 	
 	private Info_DBHelper iHelper = null;
+	private Info_Test_DBHelper tHelper = null;
 	
 	private String pass = null;
 	
@@ -17,6 +18,7 @@ public class User_Manage implements User_ManageDAO{
 	 */
 	public User_Manage(Context context){
 		iHelper = new Info_DBHelper(context);
+		tHelper = new Info_Test_DBHelper(context);
 	}
 	
 	/*
@@ -88,6 +90,26 @@ public class User_Manage implements User_ManageDAO{
 	public void info_change() {
 		// TODO Auto-generated method stub
 		
+	}
+	/*
+	 * 输入用户测试用数据
+	 */
+	@Override
+	public void input(Info_Data info_Data) {
+		//得到一个可写的数据库
+		SQLiteDatabase db = tHelper.getWritableDatabase();
+		//向个人信息数据库中插入个人信息
+		String sql = "insert into info_test(name, password, mail, gender,"
+				+"phone, image, location, age, birth) values "
+				+"(?,?,?,?,?,?,?,?,?)";
+		Object[] params = new Object[]{info_Data.getName(),
+				info_Data.getPassword(),info_Data.getMail(),
+				info_Data.getGender(),info_Data.getPhone(),
+				info_Data.getImage(),info_Data.getLocation(),
+				info_Data.getAge(),info_Data.getBirth()};
+		db.execSQL(sql, params);
+		//关闭数据库
+		db.close();
 	}
 
 }

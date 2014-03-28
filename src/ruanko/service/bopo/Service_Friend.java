@@ -24,6 +24,13 @@ public class Service_Friend {
 		return id;
 	}
 	/*
+	 * 按条件搜索方法
+	 */
+	public int[] condition(String age,String gender,String location){
+		int[] id = fDao.condition(age, gender, location);
+		return id;
+	}
+	/*
 	 * 添加好友方法
 	 */
 	public boolean add(Info_Data info_Data){

@@ -10,6 +10,8 @@ public class Friend_Manage implements Friend_ManageDAO{
 
 	private Info_DBHelper iHelper = null;
 	private Friend_DBHelper fHelper = null;
+	//测试数据
+	private Info_Test_DBHelper tHelper = null;
 	
 	/*
 	 * 构造方法
@@ -17,6 +19,8 @@ public class Friend_Manage implements Friend_ManageDAO{
 	public Friend_Manage(Context context) {
 		iHelper = new Info_DBHelper(context);
 		fHelper = new Friend_DBHelper(context);
+		
+		tHelper = new Info_Test_DBHelper(context);
 	}
 	/*
 	 * 按姓名搜索方法
@@ -36,6 +40,30 @@ public class Friend_Manage implements Friend_ManageDAO{
 		//将查询到的数据设置到Friend_Info对应的属性中
 		while(cursor.moveToNext()){
 			id = cursor.getInt(0);
+		}
+		//关闭查询和数据库
+		cursor.close();
+		db.close();
+		return id;
+	}
+	/*
+	 * 按条件搜索
+	 */
+	@Override
+	public int[] condition(String age, String gender, String location) {
+		
+		int[] id = new int[10];
+		int i = 0;
+		//得到一个可读的数据库
+		SQLiteDatabase db = tHelper.getReadableDatabase();
+		//按条件查询
+		String sql = "select *from info_test where gender = ?";
+		String params[] = new String[]{gender};
+		Cursor cursor = db.rawQuery(sql, params);
+		//将查询到的数据设置到变量中
+		while (cursor.moveToNext()) {
+			id[i] = cursor.getInt(0);
+			i++;
 		}
 		//关闭查询和数据库
 		cursor.close();
@@ -89,4 +117,5 @@ public class Friend_Manage implements Friend_ManageDAO{
 		}
 		return info_Data;
 	}
+
 }

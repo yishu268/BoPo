@@ -15,8 +15,6 @@ public class Friend_Add_Name extends Activity{
 	
 	private Service_Friend service_Friend = null;
 	
-	private int id = 0;
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -32,12 +30,16 @@ public class Friend_Add_Name extends Activity{
 	//搜索按钮点击事件
 	public void onClick_Search(View view){
 		String name_db = name.getText().toString();
-		id = service_Friend.name(name_db);
+		int id = service_Friend.name(name_db);
+		/*String test = "";
+		test = String.valueOf(id);
+		Toast.makeText(this, test, Toast.LENGTH_SHORT).show();*/
 		Intent intent = new Intent(this,Friend_Info.class);
 		Bundle bundle = new Bundle();
 		bundle.putInt("name_id", id);
 		intent.putExtras(bundle);
 		startActivity(intent);
+		finish();
 		//Intent intent = new Intent(this,Friend_Add_Result.class);
 		//startActivity(intent);
 		//finish();

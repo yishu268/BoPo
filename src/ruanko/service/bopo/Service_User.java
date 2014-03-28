@@ -32,4 +32,10 @@ public class Service_User {
 		boolean flag = uerDao.login(user,password);
 		return flag;
 	}
+	/*
+	 * 输入用户测试用数据
+	 */
+	public void input(Info_Data info_Data){
+		uerDao.input(info_Data);
+	}
 }

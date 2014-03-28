@@ -59,6 +59,29 @@ public class Register extends Activity{
 		error = (ImageView)findViewById(R.id.error);
 		error.setVisibility(View.GONE);
 		
+		password.addTextChangedListener(new TextWatcher() {
+			//输入字段有变化时
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				
+			}
+			//输入字段有变化前
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {				
+			}
+			//输入字段有变化后
+			@Override
+			public void afterTextChanged(Editable s) {	
+				if (password.getText().toString().equals(repassword.getText().toString())) {
+					error.setVisibility(View.GONE);
+					register.setEnabled(true);
+				}else {
+					error.setVisibility(View.VISIBLE);
+					register.setEnabled(false);
+				}
+			}
+		});
 		
 		repassword.addTextChangedListener(new TextWatcher() {
 			//输入字段有变化时

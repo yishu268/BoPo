@@ -10,7 +10,7 @@ public class Info_Data {
 	private String phone = null;
 	private String image= null;
 	private String location = null;
-	private int age;
+	private String age = null;
 	private String birth = null;
 	private int node_id;
 	
@@ -24,7 +24,7 @@ public class Info_Data {
 		phone = "";
 		image = "";
 		location = "";
-		age = 0;
+		age = "";
 		birth = "";
 		node_id = 0;
 	}
@@ -109,13 +109,13 @@ public class Info_Data {
 		this.location = location;
 	}
 
-
-	public int getAge() {
+	
+	public String getAge() {
 		return age;
 	}
 
 
-	public void setAge(int age) {
+	public void setAge(String age) {
 		this.age = age;
 	}
 

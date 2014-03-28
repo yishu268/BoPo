@@ -56,6 +56,7 @@ public class Friend_Info extends Activity{
 		location = (TextView)findViewById(R.id.location);
 		mail = (TextView)findViewById(R.id.mail);		
 		
+		//接受传过来的id
 		Bundle bundle = this.getIntent().getExtras();
 		nameid = bundle.getInt("name_id", -1);
 		String xx = "";
@@ -67,8 +68,8 @@ public class Friend_Info extends Activity{
 	//将数据显示到界面上
 	private void load() {
 		name.setText(info_Data.getName());
-		gender.setText(info_Data.getNode_id());
-		location.setText(info_Data.getNode_id());
+		gender.setText(info_Data.getMail());
+		location.setText(info_Data.getName());
 		mail.setText(info_Data.getMail());
 	}
 }

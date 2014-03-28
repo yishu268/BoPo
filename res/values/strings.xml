@@ -11,7 +11,7 @@
     
     <!-- login -->
     <string name="user_name">用户名</string>
-    <string name="password">密码</string>
+    <string name="password">密　码</string>
     <string name="login">登录</string>
     <string name="register">注册</string>
     <string name="forget">忘记密码</string>
@@ -36,7 +36,7 @@
     <string name="phone">手　机</string>
     <string name="mail">邮　箱</string>
     <string name="age">年　龄</string>
-    <string name="work">职　业</string>
+    <string name="birth">生　日</string>
     <string name="male">男</string>
     <string name="female">女</string>
     <string name="change_info">编辑个人信息</string>
