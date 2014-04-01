@@ -40,17 +40,19 @@
                 android:text="@string/user_name" />
 
             <TextView
+                android:id="@+id/name"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/test" />
+                android:layout_height="wrap_content"/>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:orientation="horizontal" >
-
+            android:orientation="horizontal"
+            android:focusable="true"
+            android:focusableInTouchMode="true" >
+			
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
@@ -87,11 +89,12 @@
                 android:text="@string/phone" />
 
             <EditText
+                android:id="@+id/phone"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
                 android:background="@drawable/edit_corners_all"
-                android:hint="@string/test" />
+                android:inputType="phone"/>
         </LinearLayout>
 
         <LinearLayout
@@ -108,11 +111,11 @@
                 android:text="@string/location" />
 
             <EditText
+                android:id="@+id/location"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
-                android:background="@drawable/edit_corners_all"
-                android:hint="@string/test" />
+                android:background="@drawable/edit_corners_all" />
         </LinearLayout>
         
         <LinearLayout
@@ -129,11 +132,11 @@
                 android:text="@string/birth" />
 
             <EditText
+                android:id="@+id/birth"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
-                android:background="@drawable/edit_corners_all"
-                android:hint="@string/test" />
+                android:background="@drawable/edit_corners_all"/>
         </LinearLayout>
 
         <LinearLayout
@@ -150,9 +153,9 @@
                 android:text="@string/age" />
 
             <TextView
+                android:id="@+id/age"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/age" />
+                android:layout_height="wrap_content" />
         </LinearLayout>
         
         <Button

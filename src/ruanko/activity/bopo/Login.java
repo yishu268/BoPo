@@ -1,5 +1,6 @@
 package ruanko.activity.bopo;
 
+import ruanko.model.bopo.Data;
 import ruanko.service.bopo.Service_User;
 import android.os.Bundle;
 import android.view.View;
@@ -17,11 +18,14 @@ public class Login extends Activity {
 	
 	private Service_User service_User = null;
 	
+	private Data data;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.login);
 		service_User = new Service_User(this);
+		data = (Data)getApplication();
 		init();
 	}
 	
@@ -51,10 +55,15 @@ public class Login extends Activity {
 	private void getContent(){
 		String user_db = user.getText().toString();
 		String password_db = password.getText().toString();
-		boolean flag = service_User.login(user_db,password_db);
-		//Toast.makeText(this, flag, Toast.LENGTH_SHORT).show();
+		int flag = service_User.login(user_db,password_db);
+		
+		data.setPerson_id(flag);
+		//String xx = "";
+		//xx = String.valueOf(flag);
+		
+		//Toast.makeText(this, xx, Toast.LENGTH_SHORT).show();
 		//boolean flag = true;
-		if (flag) {
+		if (flag > 0) {
 			Toast.makeText(this, "µÇÂ¼³É¹¦", Toast.LENGTH_SHORT).show();
 			Intent intent = new Intent(this,Line.class);
 			startActivity(intent);
@@ -63,5 +72,4 @@ public class Login extends Activity {
 			Toast.makeText(this, "µÇÂ¼Ê§°Ü", Toast.LENGTH_SHORT).show();
 		}
 	}
-	
 }

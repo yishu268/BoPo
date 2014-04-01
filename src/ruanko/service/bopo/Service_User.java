@@ -28,8 +28,8 @@ public class Service_User {
 	 * 注册用户的方法
 	 * Info_Data 用户信息对象
 	 */
-	public boolean login(String user,String password){
-		boolean flag = uerDao.login(user,password);
+	public int login(String user,String password){
+		int flag = uerDao.login(user,password);
 		return flag;
 	}
 	/*

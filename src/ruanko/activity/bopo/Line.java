@@ -7,10 +7,14 @@ import android.view.View;
 //成长轴界面（Line）
 public class Line extends Bottom{
 
+	//private Data data = null;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.line);
+		//data = (Data)getApplication();
+		//int id = data.getPerson_id();
 	}
 	//头像按钮点击事件
 	public void onClick_Info(View view){

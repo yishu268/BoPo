@@ -9,6 +9,16 @@ public class Data extends Application{
 	private int image[] = {R.drawable.image0,R.drawable.image1,R.drawable.image2,
 			R.drawable.image3,R.drawable.image4,R.drawable.image5,R.drawable.image6,
 			R.drawable.image7,R.drawable.image8,R.drawable.image9};
+	
+	private int person_id;
+
+	public int getPerson_id() {
+		return person_id;
+	}
+
+	public void setPerson_id(int person_id) {
+		this.person_id = person_id;
+	}
 
 	public int[] getImage() {
 		return image;
@@ -16,5 +26,5 @@ public class Data extends Application{
 
 	public void setImage(int[] image) {
 		this.image = image;
-	} 
+	}	
 }

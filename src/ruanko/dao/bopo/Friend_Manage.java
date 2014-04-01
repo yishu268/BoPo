@@ -120,8 +120,12 @@ public class Friend_Manage implements Friend_ManageDAO{
 					info_Data.setId(cursor.getInt(0));
 					info_Data.setName(cursor.getString(1));
 					info_Data.setMail(cursor.getString(3));
-					//info_Data.setNode_id(cursor.getInt(4));
-					info_Data.setImage(cursor.getString(5));				
+					info_Data.setGender(cursor.getString(4));
+					info_Data.setPhone(cursor.getString(5));
+					info_Data.setImage(cursor.getString(6));
+					info_Data.setLocation(cursor.getString(7));
+					info_Data.setAge(cursor.getString(8));
+					info_Data.setBirth(cursor.getString(9));
 				}
 				//关闭查询 关闭数据库
 				cursor.close();

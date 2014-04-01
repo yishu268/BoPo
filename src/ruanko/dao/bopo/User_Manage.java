@@ -3,7 +3,6 @@ package ruanko.dao.bopo;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 import ruanko.model.bopo.Info_Data;
 
 public class User_Manage implements User_ManageDAO{
@@ -12,6 +11,8 @@ public class User_Manage implements User_ManageDAO{
 	private Info_Test_DBHelper tHelper = null;
 	
 	private String pass = null;
+	private int id = 0;
+	//private Data data = null;
 	
 	/*
 	 * 构造方法
@@ -25,10 +26,10 @@ public class User_Manage implements User_ManageDAO{
 	 * 用户登录方法
 	 */
 	@Override
-	public boolean login(String user,String password) {
+	public int login(String user,String password) {
 		
 		if (user.equals("")||user == null) {
-			return false;
+			return 0;
 		}
 		
 		//得到一个可读的数据库
@@ -38,16 +39,17 @@ public class User_Manage implements User_ManageDAO{
 		String params[] = new String[]{user};
 		Cursor cursor = db.rawQuery(sql, params);
 		while(cursor.moveToNext()){
+			id = cursor.getInt(0);
 			pass = cursor.getString(2).toString();
 		}
 		cursor.close();
 		db.close();
-		Log.i("test", pass);
+		//Log.i("test", pass);
 		//密码验证
 		if (pass.equals(password)) {
-			return true;
+			return id;
 		}else {
-			return false;
+			return 0;
 		}
 	}
 	

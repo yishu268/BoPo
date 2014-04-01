@@ -19,7 +19,7 @@
         android:padding="20dp" >
 
         <ImageView
-            android:id="@+id/info_head"
+            android:id="@+id/head"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@null"
@@ -40,6 +40,7 @@
                 android:text="@string/user_name" />
 
             <TextView
+                android:id="@+id/name"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/test"/>
@@ -58,6 +59,7 @@
                 android:text="@string/gender" />
 
             <TextView
+                android:id="@+id/gender"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/male" />
@@ -76,6 +78,7 @@
                 android:text="@string/phone" />
 
             <TextView
+                android:id="@+id/phone"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/test" />
@@ -94,6 +97,7 @@
                 android:text="@string/location" />
 
             <TextView
+                android:id="@+id/location"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/test" />
@@ -112,6 +116,7 @@
                 android:text="@string/birth" />
 
             <TextView
+                android:id="@+id/birth"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/test" />
@@ -130,6 +135,7 @@
                 android:text="@string/age" />
 
             <TextView
+                android:id="@+id/age"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/test" />
