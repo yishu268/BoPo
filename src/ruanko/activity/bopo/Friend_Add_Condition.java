@@ -1,15 +1,17 @@
 package ruanko.activity.bopo;
 
+import java.util.List;
+
 import ruanko.service.bopo.Service_Friend;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 //按条件添加好友界面（Friend_Add_Condition）
 public class Friend_Add_Condition extends Activity{
@@ -37,16 +39,29 @@ public class Friend_Add_Condition extends Activity{
 		RadioButton rButton = (RadioButton)findViewById(gender.getCheckedRadioButtonId());
 		String age_db = age.getText().toString();
 		String gender_db = rButton.getText().toString();
-		String location_db = "123";
-		int[] id = service_Friend.condition(age_db, gender_db, location_db);
+		String location_db = location.getSelectedItem().toString();
+		String gender_dbs = "";
+		if (gender_db.equals("男")) {
+			gender_dbs = "female";
+		}else if (gender_db.equals("女")) {
+			gender_dbs = "male";
+		}
+		if (age_db.equals("")||age_db == null) {
+			Toast.makeText(this, "请输入年龄", Toast.LENGTH_SHORT).show();
+		}else {
+			List<?> list = service_Friend.condition(age_db, gender_dbs, location_db);
+			
+			int size = list.size();
+			String[] array = new String[size];
+			array = (String[])list.toArray(array);
 
-
-		Intent intent = new Intent(this,Friend_Add_Result.class);
-		Bundle bundle = new Bundle();
-		bundle.putIntArray("id", id);
-		intent.putExtras(bundle);
-		startActivity(intent);
-		finish();
+			Intent intent = new Intent(this,Friend_Add_Result.class);
+			Bundle bundle = new Bundle();
+			bundle.putStringArray("id", array);
+			intent.putExtras(bundle);
+			startActivity(intent);
+			finish();
+		}
 	}
 
 	//初始化
@@ -54,12 +69,6 @@ public class Friend_Add_Condition extends Activity{
 		age = (EditText)findViewById(R.id.age);
 		gender = (RadioGroup)findViewById(R.id.gender);
 		location = (Spinner)findViewById(R.id.location);
-		
-		//Spinner赋值
-		ArrayAdapter<?> adapter = new ArrayAdapter<String>(this, 
-				android.R.layout.simple_spinner_item, R.array.city);
-		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		location.setAdapter(adapter);
 	}
 	//获取数据
 

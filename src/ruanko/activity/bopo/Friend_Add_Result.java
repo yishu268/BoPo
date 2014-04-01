@@ -1,5 +1,7 @@
 package ruanko.activity.bopo;
 
+import ruanko.model.bopo.Info_Data;
+import ruanko.service.bopo.Service_Friend;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +11,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 //用户搜索结果界面（Friend_Add_Result）
 public class Friend_Add_Result extends Activity{
@@ -16,12 +19,15 @@ public class Friend_Add_Result extends Activity{
 	//声明ListView
 	private ListView result = null;
 	
-	private int[] id = null;
+	private String[] id = null;
+	
+	private Service_Friend sFriend = null;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.friend_add_result);
+		sFriend = new Service_Friend(this);
 		init();
 	}
 	//返回按钮点击事件
@@ -46,10 +52,23 @@ public class Friend_Add_Result extends Activity{
 		//ArrayList<Friend_Info_Data> data = (ArrayList<Friend_Info_Data>)getIntent().getSerializableExtra("name");
 		
 		Bundle bundle = this.getIntent().getExtras();
-		id = bundle.getIntArray("id");
-				
+		id = bundle.getStringArray("id");
+		
+		if (id == null||id.length == 0) {
+			Toast.makeText(this, "未找到符合条件的用户", Toast.LENGTH_SHORT).show();
+		}
+		
+		Info_Data info_Data = new Info_Data();
+		String[] name = new String[id.length];
+		
+		for (int i = 0; i < id.length; i++) {
+			info_Data = sFriend.getId(Integer.valueOf(id[i]).intValue());
+			name[i] = info_Data.getName();
+		}
+		Toast.makeText(this, id[0], Toast.LENGTH_SHORT).show();
+		
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-				R.layout.friend_list_item,get(id));
+				R.layout.friend_list_item,name);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		result.setAdapter(adapter);
 		//为ListView添加点击事件
@@ -70,14 +89,5 @@ public class Friend_Add_Result extends Activity{
 				startActivity(intent);
 			}
 		});
-	}
-	
-	private String[] get(int[] id){
-		String[] text = new String[10];
-		for (int i = 0; i < 10 ; i++) {
-			text[i] = String.valueOf(id[i]);
-		}
-		return text;
-		
 	}
 }

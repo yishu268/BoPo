@@ -1,5 +1,7 @@
 package ruanko.service.bopo;
 
+import java.util.List;
+
 import android.content.Context;
 
 import ruanko.dao.bopo.Friend_Manage;
@@ -26,8 +28,8 @@ public class Service_Friend {
 	/*
 	 * 按条件搜索方法
 	 */
-	public int[] condition(String age,String gender,String location){
-		int[] id = fDao.condition(age, gender, location);
+	public List<?> condition(String age,String gender,String location){
+		List<?> id = fDao.condition(age, gender, location);
 		return id;
 	}
 	/*

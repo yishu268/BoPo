@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 //通过用户名添加好友界面（Friend_Add_Name）
 public class Friend_Add_Name extends Activity{
@@ -31,15 +32,20 @@ public class Friend_Add_Name extends Activity{
 	public void onClick_Search(View view){
 		String name_db = name.getText().toString();
 		int id = service_Friend.name(name_db);
-		/*String test = "";
-		test = String.valueOf(id);
-		Toast.makeText(this, test, Toast.LENGTH_SHORT).show();*/
-		Intent intent = new Intent(this,Friend_Info.class);
-		Bundle bundle = new Bundle();
-		bundle.putInt("name_id", id);
-		intent.putExtras(bundle);
-		startActivity(intent);
-		finish();
+		//String test = "";
+		//test = String.valueOf(id);
+		if (id == -1) {
+			Toast.makeText(this, "请输入用户名", Toast.LENGTH_SHORT).show();
+		}else if (id == 0) {
+			Toast.makeText(this, "未找到用户", Toast.LENGTH_SHORT).show();
+		}else {
+			Intent intent = new Intent(this,Friend_Info.class);
+			Bundle bundle = new Bundle();
+			bundle.putInt("name_id", id);
+			intent.putExtras(bundle);
+			startActivity(intent);
+			finish();
+		}	
 		//Intent intent = new Intent(this,Friend_Add_Result.class);
 		//startActivity(intent);
 		//finish();

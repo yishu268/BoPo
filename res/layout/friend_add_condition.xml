@@ -56,13 +56,13 @@
 		            android:layout_width="wrap_content"
 		        	android:layout_height="wrap_content"
 		        	android:checked="true"
-		        	android:text="male"/>
+		        	android:text="@string/male"/>
 		        
 		        <RadioButton
 		            android:id="@+id/female"
 		            android:layout_width="wrap_content"
 		            android:layout_height="wrap_content"
-		        	android:text="female"/>
+		        	android:text="@string/female"/>
 		    </RadioGroup>
 	    </LinearLayout>
 	    
@@ -82,7 +82,8 @@
 		        android:id="@+id/location"
 		        android:layout_width="fill_parent"
 		        android:layout_height="30dp"
-		        android:background="@drawable/edit_corners_all"/>
+		        android:background="@drawable/edit_corners_all"
+		        android:entries="@array/city"/>
 	    </LinearLayout>
 	    
 	    <Button

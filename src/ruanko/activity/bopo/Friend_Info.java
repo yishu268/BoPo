@@ -59,9 +59,9 @@ public class Friend_Info extends Activity{
 		//接受传过来的id
 		Bundle bundle = this.getIntent().getExtras();
 		nameid = bundle.getInt("name_id", -1);
-		String xx = "";
-		xx = String.valueOf(nameid);
-		Toast.makeText(this, xx, Toast.LENGTH_SHORT).show();
+		//String xx = "";
+		//xx = String.valueOf(nameid);
+		//Toast.makeText(this, xx, Toast.LENGTH_SHORT).show();
 		info_Data = service_Friend.getId(nameid);
 		load();
 	}
