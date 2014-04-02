@@ -7,18 +7,20 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 //个人信息界面（Info）
 public class Info extends Activity{
 	//声明控件
-	
 	private TextView name = null;
 	private TextView gender = null;
 	private TextView phone = null;
 	private TextView location = null;
 	private TextView birth = null;
 	private TextView age = null;
+	
+	private ImageView head = null;
 	
 	private Data data = null;
 	
@@ -32,6 +34,14 @@ public class Info extends Activity{
 		service_Friend = new Service_Friend(this);
 		data = (Data)getApplication();
 		init();
+	}
+	//重载获取数据
+	@Override  
+	protected void onNewIntent(Intent intent) {        
+	    super.onNewIntent(intent);  
+	    setIntent(intent);
+		load();
+	    //here we can use getIntent() to get the extra data.
 	}
 	
 	//修改按钮点击事件
@@ -51,6 +61,7 @@ public class Info extends Activity{
 		location = (TextView)findViewById(R.id.location);
 		birth = (TextView)findViewById(R.id.birth);
 		age = (TextView)findViewById(R.id.age);
+		head = (ImageView)findViewById(R.id.head);
 		load();
 	}
 	//载入数据
@@ -64,5 +75,6 @@ public class Info extends Activity{
 		location.setText(info_Data.getLocation());
 		birth.setText(info_Data.getBirth());
 		age.setText(info_Data.getAge());
+		head.setImageResource(data.getImage()[data.getHead_id()]);
 	}
 }

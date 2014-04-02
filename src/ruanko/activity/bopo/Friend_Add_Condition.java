@@ -54,13 +54,16 @@ public class Friend_Add_Condition extends Activity{
 			int size = list.size();
 			String[] array = new String[size];
 			array = (String[])list.toArray(array);
-
-			Intent intent = new Intent(this,Friend_Add_Result.class);
-			Bundle bundle = new Bundle();
-			bundle.putStringArray("id", array);
-			intent.putExtras(bundle);
-			startActivity(intent);
-			finish();
+			if(size == 0){
+				Toast.makeText(this, "未找到相关用户", Toast.LENGTH_SHORT).show();
+			}else {
+				Intent intent = new Intent(this,Friend_Add_Result.class);
+				Bundle bundle = new Bundle();
+				bundle.putStringArray("id", array);
+				intent.putExtras(bundle);
+				startActivity(intent);
+				finish();
+			}
 		}
 	}
 

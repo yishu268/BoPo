@@ -10,7 +10,9 @@ public class Data extends Application{
 			R.drawable.image3,R.drawable.image4,R.drawable.image5,R.drawable.image6,
 			R.drawable.image7,R.drawable.image8,R.drawable.image9};
 	
-	private int person_id;
+	private int person_id = 0;
+	
+	private int head_id = 0;
 
 	public int getPerson_id() {
 		return person_id;
@@ -26,5 +28,14 @@ public class Data extends Application{
 
 	public void setImage(int[] image) {
 		this.image = image;
-	}	
+	}
+
+	public int getHead_id() {
+		return head_id;
+	}
+
+	public void setHead_id(int head_id) {
+		this.head_id = head_id;
+	}
+	
 }

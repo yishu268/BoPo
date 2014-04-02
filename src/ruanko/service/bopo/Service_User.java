@@ -38,4 +38,11 @@ public class Service_User {
 	public void input(Info_Data info_Data){
 		uerDao.input(info_Data);
 	}
+	/*
+	 * 用户信息修改方法
+	 */
+	public boolean update(Info_Data info_Data){
+		boolean flag = uerDao.update(info_Data);
+		return flag;
+	}
 }

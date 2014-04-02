@@ -18,7 +18,7 @@
 	    android:text="@string/select_head"/>
 	
 	<GridView 
-	    android:id="@+id/head_image_grid"    
+	    android:id="@+id/head"    
     	android:layout_width="fill_parent"     
     	android:layout_height="fill_parent"    
     	android:numColumns="auto_fit"    

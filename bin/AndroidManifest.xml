@@ -33,7 +33,7 @@
         
         <activity android:name=".Line"        android:launchMode="singleTask"/>
         <activity android:name=".Info"        android:launchMode="singleTask"/>
-        <activity android:name=".Info_Change"/>
+        <activity android:name=".Info_Change" android:launchMode="singleTask"/>
         <activity android:name=".Info_Head"/>
         <activity android:name=".Node_View"   android:launchMode="singleTask"/>
         <activity android:name=".Node_Add"/>

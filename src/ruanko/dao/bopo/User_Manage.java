@@ -10,7 +10,7 @@ public class User_Manage implements User_ManageDAO{
 	private Info_DBHelper iHelper = null;
 	private Info_Test_DBHelper tHelper = null;
 	
-	private String pass = null;
+	private String pass = "";
 	private int id = 0;
 	//private Data data = null;
 	
@@ -89,7 +89,22 @@ public class User_Manage implements User_ManageDAO{
 	 * 用户信息修改方法
 	 */
 	@Override
-	public void info_change() {
+	public boolean update(Info_Data info_Data) {
+		if(info_Data != null){
+			//得到一个可写的数据库
+			SQLiteDatabase db = iHelper.getWritableDatabase();
+			//修改数据表中对应的联系人信息
+			String sql ="update info set gender = ?, phone = ?,"
+					+"location = ?, birth = ?, age = ? where _id = ?";
+			Object[] params = new Object[]{info_Data.getGender(),
+					info_Data.getPhone(),info_Data.getLocation(),
+					info_Data.getBirth(),info_Data.getAge(),info_Data.getId()};
+			db.execSQL(sql, params);
+			db.close();
+			return true;
+		}else {
+			return false;
+		}
 		// TODO Auto-generated method stub
 		
 	}

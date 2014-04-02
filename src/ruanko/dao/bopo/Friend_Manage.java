@@ -14,7 +14,7 @@ public class Friend_Manage implements Friend_ManageDAO{
 	private Info_DBHelper iHelper = null;
 	private Friend_DBHelper fHelper = null;
 	//测试数据
-	private Info_Test_DBHelper tHelper = null;
+	//private Info_Test_DBHelper tHelper = null;
 	
 	/*
 	 * 构造方法
@@ -23,7 +23,7 @@ public class Friend_Manage implements Friend_ManageDAO{
 		iHelper = new Info_DBHelper(context);
 		fHelper = new Friend_DBHelper(context);
 		
-		tHelper = new Info_Test_DBHelper(context);
+		//tHelper = new Info_Test_DBHelper(context);
 	}
 	/*
 	 * 按姓名搜索方法
@@ -61,9 +61,9 @@ public class Friend_Manage implements Friend_ManageDAO{
 		//int[] id = new int[10];
 		int i = 0;
 		//得到一个可读的数据库
-		SQLiteDatabase db = tHelper.getReadableDatabase();
+		SQLiteDatabase db = iHelper.getReadableDatabase();
 		//按条件查询
-		String sql = "select *from info_test where age = ? and gender = ? and location = ?";
+		String sql = "select *from info where age = ? and gender = ? and location = ?";
 		String params[] = new String[]{age,gender,location};
 		Cursor cursor = db.rawQuery(sql, params);
 		//将查询到的数据设置到变量中
@@ -110,8 +110,8 @@ public class Friend_Manage implements Friend_ManageDAO{
 			Info_Data info_Data = null;
 			if (id > 0) {
 				//得到一个可读的数据库
-				SQLiteDatabase db = tHelper.getReadableDatabase();
-				String sql = "select *from info_test where _id = ?";
+				SQLiteDatabase db = iHelper.getReadableDatabase();
+				String sql = "select *from info where _id = ?";
 				String[] params = new String[]{String.valueOf(id)}; 
 				Cursor cursor = db.rawQuery(sql,params);
 				//利用cursor进行查询并将属性设置到info_Data对应的属性中

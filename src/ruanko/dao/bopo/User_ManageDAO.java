@@ -11,7 +11,7 @@ public interface User_ManageDAO {
 		
 	public void find_password();
 	
-	public void info_change();
+	public boolean update(Info_Data info_Data);
 	
 	public void input(Info_Data info_Data);
 }
