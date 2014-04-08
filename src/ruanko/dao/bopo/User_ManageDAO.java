@@ -14,4 +14,6 @@ public interface User_ManageDAO {
 	public boolean update(Info_Data info_Data);
 	
 	public void input(Info_Data info_Data);
+	
+	public boolean check(String name);
 }

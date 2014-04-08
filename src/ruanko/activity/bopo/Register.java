@@ -23,6 +23,7 @@ public class Register extends Activity{
 	private Button register = null;
 	
 	private ImageView error = null;
+	private ImageView error_1 = null;
 	
 	private Service_User service_User = null;
 	
@@ -58,6 +59,37 @@ public class Register extends Activity{
 		
 		error = (ImageView)findViewById(R.id.error);
 		error.setVisibility(View.GONE);
+		error_1 = (ImageView)findViewById(R.id.error_1);
+		error_1.setVisibility(View.GONE);
+		
+		name.addTextChangedListener(new TextWatcher() {
+			
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+				boolean flag = service_User.check(name.getText().toString());
+				if (flag) {
+					error_1.setVisibility(View.GONE);
+					register.setEnabled(true);
+				}else {
+					error_1.setVisibility(View.VISIBLE);
+					register.setEnabled(false);
+				}
+			}
+		});
 		
 		password.addTextChangedListener(new TextWatcher() {
 			//输入字段有变化时
@@ -74,11 +106,11 @@ public class Register extends Activity{
 			@Override
 			public void afterTextChanged(Editable s) {	
 				if (password.getText().toString().equals(repassword.getText().toString())) {
-					error.setVisibility(View.GONE);
-					register.setEnabled(true);
-				}else {
 					error.setVisibility(View.VISIBLE);
 					register.setEnabled(false);
+				}else {
+					error.setVisibility(View.GONE);
+					register.setEnabled(true);
 				}
 			}
 		});

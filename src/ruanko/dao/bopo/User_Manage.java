@@ -128,5 +128,28 @@ public class User_Manage implements User_ManageDAO{
 		//关闭数据库
 		db.close();
 	}
-
+	/*
+	 * 检测注册是否重名
+	 */
+	@Override
+	public boolean check(String name) {
+		//获得一个可读的数据库
+		if (name == null||name.equals("")) {
+			return true;
+		}
+		
+		String namex = null;
+		SQLiteDatabase db = iHelper.getReadableDatabase();
+		String sql = "select *from info where name = ?";
+		String[] params = new String[]{name};
+		Cursor cursor = db.rawQuery(sql, params);
+		while (cursor.moveToNext()) {
+			namex = cursor.getString(1);
+		}
+		if (namex == null||namex.equals("")) {
+			return true;
+		}else {
+			return false;
+		}
+	}
 }

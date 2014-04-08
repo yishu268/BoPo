@@ -105,12 +105,15 @@ public class Info_Change extends Activity{
 		birth.setText(info_Data.getBirth());
 		head.setImageResource(data.getImage()[data.getHead_id()]);
 		
-		if (info_Data.getGender().equals("Ů")||info_Data.getGender().equals("")){
+		if (info_Data.getGender() == null || info_Data.getGender().equals("")){
 			RadioButton rb1 = (RadioButton)findViewById(R.id.female);
 			rb1.setChecked(true);
-		}else {
-			RadioButton rb2 = (RadioButton)findViewById(R.id.male);
+		}else if(info_Data.getGender().equals("Ů")) {
+			RadioButton rb2 = (RadioButton)findViewById(R.id.female);
 			rb2.setChecked(true);
+		}else {
+			RadioButton rb3 = (RadioButton)findViewById(R.id.male);
+			rb3.setChecked(true);
 		}
 	}
 }

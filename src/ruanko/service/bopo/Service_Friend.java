@@ -46,4 +46,19 @@ public class Service_Friend {
 		Info_Data info_Data = fDao.getId(id);
 		return info_Data;
 	}
+	/*
+	 * 显示好友方法
+	 */
+	public List<?> show(){
+		List<?> list = fDao.show();
+		return list;
+	}
+	/*
+	 * 检测好友重名方法
+	 */
+	public boolean check(String name){
+		boolean flag = fDao.check(name);
+		return flag;
+	}
+
 }

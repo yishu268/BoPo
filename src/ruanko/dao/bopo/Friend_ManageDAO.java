@@ -15,4 +15,8 @@ public interface Friend_ManageDAO {
 	
 	public Info_Data getId(int id);
 	
+	public List<?> show();
+	
+	public boolean check(String name);
+	
 }

@@ -3,6 +3,7 @@ package ruanko.dao.bopo;
 import java.util.ArrayList;
 import java.util.List;
 
+import ruanko.model.bopo.Friend_Data;
 import ruanko.model.bopo.Info_Data;
 
 import android.content.Context;
@@ -134,6 +135,47 @@ public class Friend_Manage implements Friend_ManageDAO{
 			return info_Data;
 		}else {
 			return null;
+		}
+	}
+	@Override
+	public List<?> show() {
+		//获得一个可读的数据库
+		List<Friend_Data> list = null;
+		Friend_Data friend_Data = new Friend_Data();
+		SQLiteDatabase db = fHelper.getReadableDatabase();
+		String sql = "select *from friend";
+		Cursor cursor = db.rawQuery(sql, null);
+		//将查询的结果添加到对应属性上
+		list = new ArrayList<Friend_Data>();
+		while (cursor.moveToNext()) {
+			friend_Data.setName(cursor.getString(1));
+			list.add(friend_Data);
+		}
+		cursor.close();
+		db.close();
+		return list;
+	}
+	/*
+	 * 检测好友重名
+	 */
+	@Override
+	public boolean check(String name) {
+		//得到一个可读的数据库
+		if (name == null||name.equals("")) {
+			return true;
+		}
+		String namex = null;
+		SQLiteDatabase db = fHelper.getReadableDatabase();
+		String sql = "select *from friend where name = ?";
+		String[] params = new String[]{name};
+		Cursor cursor = db.rawQuery(sql, params);
+		while (cursor.moveToNext()) {
+			namex = cursor.getString(1);	
+		}
+		if (namex == null||namex.equals("")) {
+			return true;
+		}else {
+			return false;
 		}
 	}
 }

@@ -45,4 +45,11 @@ public class Service_User {
 		boolean flag = uerDao.update(info_Data);
 		return flag;
 	}
+	/*
+	 * 检查注册是否重名
+	 */
+	public boolean check(String name){
+		boolean flag = uerDao.check(name);
+		return flag;
+	}
 }

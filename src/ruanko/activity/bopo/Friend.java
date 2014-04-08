@@ -1,14 +1,18 @@
 package ruanko.activity.bopo;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
+import ruanko.model.bopo.Friend_Data;
+import ruanko.service.bopo.Service_Friend;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.AdapterView.OnItemClickListener;
 
 //好友界面（Friend）
@@ -17,12 +21,23 @@ public class Friend extends Bottom{
 	
 	private ListView friend_list = null;
 	
+	private Service_Friend service_Friend = null;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.friend);
+		service_Friend = new Service_Friend(this);
 		init();
 	}
+	//重载获取数据
+		@Override  
+		protected void onNewIntent(Intent intent) {        
+		    super.onNewIntent(intent);  
+		    setIntent(intent);
+			init();
+		    //here we can use getIntent() to get the extra data.
+		}
 	
 	//添加按钮点击事件
 	public void onClick_Add(View view){
@@ -31,25 +46,31 @@ public class Friend extends Bottom{
 	}
 	
 	private void init() {
-		int size = 1;
+
 		//给ListView添加监听器
 		friend_list = (ListView)findViewById(R.id.friend_list);
 		if (friend_list == null)
 			return;
 		//第一步：获得数据源（model）
-		List<String> data = new ArrayList<String>();
+		List<?> friendList = new ArrayList<Friend_Data>();
+		friendList = service_Friend.show();
+		List<HashMap<String, String>> myList = new ArrayList<HashMap<String, String>>();
 		
-		for (int i = 0; i < 10; i++) {
-			data.add("" + size++);
+		if (friendList != null) {
+			for (int i = 0; i < friendList.size(); i++) {
+				Friend_Data friend_Data = (Friend_Data)friendList.get(i);
+				//用HashMap做映射
+				HashMap<String, String> map = new HashMap<String, String>();
+				map.put("friend_list", friend_Data.getName());
+				myList.add(map);
+			}
 		}
-		// 第二步：new一个适配器（controller）
-	    // 参数1：Context
-	    // 参数2：ListView的item布局
-	    // 参数3：数据填充在item布局下的那个控件id
-	    // 参数4：填充的数据
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, 
-				R.layout.friend_list_item, R.id.text, data);
-		// 第三步：给ListView设置适配器（view）
+		//用给ListView绑定数据
+		SimpleAdapter adapter = new SimpleAdapter(this, 
+				myList, //数据来源
+				R.layout.friend_list_item, //ListView的XML实现
+				new String[]{"friend_list"}, //动态数组与name对应的子项
+				new int[]{R.id.text});
 		friend_list.setAdapter(adapter);
 		//为ListView添加点击事件
 		friend_list.setOnItemClickListener(new OnItemClickListener() {
@@ -57,7 +78,7 @@ public class Friend extends Bottom{
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-				Intent intent = new Intent(Friend.this,Friend_Line.class);
+				Intent intent = new Intent(Friend.this,Friend_Delete.class);
 				startActivity(intent);
 			}
 		});
