@@ -108,7 +108,7 @@
             android:layout_width="fill_parent"
             android:layout_height="45dp"
             android:background="@drawable/button_corners_all"
-            android:text="@string/delete" />
+            android:text="@string/add_friend" />
     </LinearLayout>
 
 </LinearLayout>

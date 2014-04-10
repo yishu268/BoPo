@@ -16,6 +16,8 @@ public class Friend_Add extends Activity{
 	
 	//返回按钮点击事件
 	public void onClick_Back(View view){
+		Intent intent = new Intent(this,Friend.class);
+		startActivity(intent);
 		finish();
 	}
 	//添加好友按钮点击事件

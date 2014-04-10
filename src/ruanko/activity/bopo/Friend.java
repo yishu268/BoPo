@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
 //好友界面（Friend）
@@ -61,7 +62,8 @@ public class Friend extends Bottom{
 				Friend_Data friend_Data = (Friend_Data)friendList.get(i);
 				//用HashMap做映射
 				HashMap<String, String> map = new HashMap<String, String>();
-				map.put("friend_list", friend_Data.getName());
+				map.put("text", friend_Data.getName());
+				map.put("textid", String.valueOf(friend_Data.getId()));
 				myList.add(map);
 			}
 		}
@@ -69,8 +71,8 @@ public class Friend extends Bottom{
 		SimpleAdapter adapter = new SimpleAdapter(this, 
 				myList, //数据来源
 				R.layout.friend_list_item, //ListView的XML实现
-				new String[]{"friend_list"}, //动态数组与name对应的子项
-				new int[]{R.id.text});
+				new String[]{"text","textid"}, //动态数组与name对应的子项
+				new int[]{R.id.text,R.id.textid});
 		friend_list.setAdapter(adapter);
 		//为ListView添加点击事件
 		friend_list.setOnItemClickListener(new OnItemClickListener() {
@@ -78,7 +80,10 @@ public class Friend extends Bottom{
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-				Intent intent = new Intent(Friend.this,Friend_Delete.class);
+				TextView text = (TextView)arg1.findViewById(R.id.textid);
+				String id = text.getText().toString();
+				Intent intent = new Intent(Friend.this,Friend_Line.class);
+				intent.putExtra("id", id);
 				startActivity(intent);
 			}
 		});

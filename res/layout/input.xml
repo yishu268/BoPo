@@ -14,10 +14,10 @@
         <TextView 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/user_name"/>
+            android:text="@string/title"/>
         
         <EditText
-            android:id="@+id/name"
+            android:id="@+id/title"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             tools:ignore="TextFields" />
@@ -32,10 +32,10 @@
         <TextView 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/password"/>
+            android:text="@string/type"/>
         
         <EditText
-            android:id="@+id/password"
+            android:id="@+id/type"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             tools:ignore="TextFields" />
@@ -50,10 +50,10 @@
         <TextView 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/mail"/>
+            android:text="内容"/>
         
         <EditText
-            android:id="@+id/mail"
+            android:id="@+id/text"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"/>
     </LinearLayout>
@@ -66,10 +66,10 @@
         <TextView 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/gender"/>
+            android:text="日期"/>
         
         <EditText 
-            android:id="@+id/gender"
+            android:id="@+id/date"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"/>
     </LinearLayout>
@@ -82,10 +82,10 @@
         <TextView 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/phone"/>
+            android:text="user_id"/>
         
         <EditText 
-            android:id="@+id/phone"
+            android:id="@+id/user_id"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"/>
     </LinearLayout>
@@ -98,10 +98,10 @@
         <TextView 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="头　像"/>
+            android:text="review_id"/>
         
         <EditText 
-            android:id="@+id/image"
+            android:id="@+id/review_id"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"/>
     </LinearLayout>
@@ -154,10 +154,24 @@
             android:layout_height="wrap_content"/>
     </LinearLayout>
 
+	<LinearLayout 
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal">"
 	<Button 
 	    android:id="@+id/save"
 	    android:onClick="onClick_Save"
+	    android:layout_weight="1"
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
 	    android:text="@string/sava"/>
+	<Button 
+	    android:id="@+id/delete"
+	    android:onClick="onClick_Delete"
+	    android:layout_weight="1"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:text="@string/delete"/>
+
+	</LinearLayout>
 </LinearLayout>

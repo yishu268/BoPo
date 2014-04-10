@@ -1,7 +1,7 @@
 package ruanko.activity.bopo;
 
-import ruanko.model.bopo.Info_Data;
-import ruanko.service.bopo.Service_User;
+import ruanko.model.bopo.Node_Data;
+import ruanko.service.bopo.Service_Node;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,53 +9,48 @@ import android.widget.EditText;
 
 public class Input extends Activity{
 
-	private EditText name = null;
-	private EditText password = null;
-	private EditText mail = null;
-	private EditText gender = null;
-	private EditText phone = null;
-	private EditText image = null;
-	private EditText location = null;
-	private EditText age = null;
-	private EditText birth = null;
-	private Service_User service_User = null;
+	private EditText title = null;
+	private EditText type = null;
+	private EditText text = null;
+	private EditText date = null;
+	private EditText user_id = null;
+	private EditText review_id = null;
+
+	private Service_Node service_Node = null;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.input);
-		service_User = new Service_User(this); 
+		service_Node = new Service_Node(this); 
 		init();
 	}
 	
 	public void onClick_Save(View view){
-		service_User.input(getContent());
+		service_Node.input(getContent());
+	}
+	public void onClick_Delete(View view){
+		service_Node.delete();
 	}
 	
 	private void init(){
-		name = (EditText)findViewById(R.id.name);
-		password = (EditText)findViewById(R.id.password);
-		mail = (EditText)findViewById(R.id.mail);
-		gender = (EditText)findViewById(R.id.gender);
-		phone = (EditText)findViewById(R.id.phone);
-		image = (EditText)findViewById(R.id.image);
-		location = (EditText)findViewById(R.id.location);
-		age = (EditText)findViewById(R.id.age);
-		birth = (EditText)findViewById(R.id.birth);
+		title = (EditText)findViewById(R.id.title);
+		type = (EditText)findViewById(R.id.type);
+		text = (EditText)findViewById(R.id.text);
+		date = (EditText)findViewById(R.id.date);
+		user_id = (EditText)findViewById(R.id.user_id);
+		review_id = (EditText)findViewById(R.id.review_id);
 	}
 	
-	private Info_Data getContent(){
-		Info_Data info_Data = new Info_Data();
-		info_Data.setName(name.getText().toString());
-		info_Data.setPassword(password.getText().toString());
-		info_Data.setMail(mail.getText().toString());
-		info_Data.setGender(gender.getText().toString());
-		info_Data.setPhone(phone.getText().toString());
-		info_Data.setImage(image.getText().toString());
-		info_Data.setLocation(location.getText().toString());
-		info_Data.setAge(age.getText().toString());
-		info_Data.setBirth(birth.getText().toString());
-		return info_Data;		
+	private Node_Data getContent(){
+		Node_Data node_Data = new Node_Data();
+		node_Data.setTitle(title.getText().toString());
+		node_Data.setType(type.getText().toString());
+		node_Data.setText(text.getText().toString());
+		node_Data.setDate(date.getText().toString());
+		node_Data.setUser_id(user_id.getText().toString());
+		node_Data.setReview_id(review_id.getText().toString());
+		return node_Data;		
 	}
 
 }

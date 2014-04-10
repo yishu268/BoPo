@@ -117,7 +117,7 @@ public class Friend_Manage implements Friend_ManageDAO{
 				Cursor cursor = db.rawQuery(sql,params);
 				//利用cursor进行查询并将属性设置到info_Data对应的属性中
 				if (cursor.moveToNext()) {
-					info_Data = new Info_Data();
+				    info_Data = new Info_Data();
 					info_Data.setId(cursor.getInt(0));
 					info_Data.setName(cursor.getString(1));
 					info_Data.setMail(cursor.getString(3));
@@ -148,6 +148,7 @@ public class Friend_Manage implements Friend_ManageDAO{
 		//将查询的结果添加到对应属性上
 		list = new ArrayList<Friend_Data>();
 		while (cursor.moveToNext()) {
+			friend_Data.setId(cursor.getInt(0));
 			friend_Data.setName(cursor.getString(1));
 			list.add(friend_Data);
 		}
