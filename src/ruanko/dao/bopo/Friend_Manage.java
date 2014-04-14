@@ -141,13 +141,13 @@ public class Friend_Manage implements Friend_ManageDAO{
 	public List<?> show() {
 		//获得一个可读的数据库
 		List<Friend_Data> list = null;
-		Friend_Data friend_Data = new Friend_Data();
 		SQLiteDatabase db = fHelper.getReadableDatabase();
 		String sql = "select *from friend";
 		Cursor cursor = db.rawQuery(sql, null);
 		//将查询的结果添加到对应属性上
 		list = new ArrayList<Friend_Data>();
 		while (cursor.moveToNext()) {
+			Friend_Data friend_Data = new Friend_Data();
 			friend_Data.setId(cursor.getInt(0));
 			friend_Data.setName(cursor.getString(1));
 			list.add(friend_Data);

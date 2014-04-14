@@ -48,7 +48,7 @@ public class Friend_Line extends Activity{
 		String id = bundle.getString("id");
 		Toast.makeText(this, id, Toast.LENGTH_SHORT).show();
 		
-		List<?> list = service_Node.line(1);
+		List<?> list = service_Node.line(Integer.parseInt(id));
 		
 		List<HashMap<String, String>> myList = new ArrayList<HashMap<String, String>>();
 		

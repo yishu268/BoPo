@@ -15,6 +15,7 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Toast;
 
 //好友界面（Friend）
 public class Friend extends Bottom{
@@ -60,6 +61,7 @@ public class Friend extends Bottom{
 		if (friendList != null) {
 			for (int i = 0; i < friendList.size(); i++) {
 				Friend_Data friend_Data = (Friend_Data)friendList.get(i);
+				Toast.makeText(this, String.valueOf(friendList.size()), Toast.LENGTH_SHORT).show();
 				//用HashMap做映射
 				HashMap<String, String> map = new HashMap<String, String>();
 				map.put("text", friend_Data.getName());
