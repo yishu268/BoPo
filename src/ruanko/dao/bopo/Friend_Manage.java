@@ -86,15 +86,15 @@ public class Friend_Manage implements Friend_ManageDAO{
 	 * 添加好友方法
 	 */
 	@Override
-	public boolean add(Info_Data info_Data) {
+	public boolean add(Info_Data info_Data,int userid,int friendid) {
 		//得到一个可写的数据库
 		String test = "remark";
 		SQLiteDatabase db = fHelper.getWritableDatabase();
 		if (info_Data!=null) {
 			//向好友数据库中插入好友信息
-			String sql = "insert into friend(name, remark) values "
-					+"(?,?)";
-			Object[] params = new Object[]{info_Data.getName(),test};
+			String sql = "insert into friend(name, userid, friendid, remark) values "
+					+"(?,?,?,?)";
+			Object[] params = new Object[]{info_Data.getName(),String.valueOf(userid),String.valueOf(friendid),test};
 			db.execSQL(sql, params);
 			db.close();
 			return true;
@@ -138,18 +138,20 @@ public class Friend_Manage implements Friend_ManageDAO{
 		}
 	}
 	@Override
-	public List<?> show() {
+	public List<?> show(int id) {
 		//获得一个可读的数据库
 		List<Friend_Data> list = null;
 		SQLiteDatabase db = fHelper.getReadableDatabase();
-		String sql = "select *from friend";
-		Cursor cursor = db.rawQuery(sql, null);
+		String sql = "select *from friend where userid = ?";
+		String[] params = new String[]{String.valueOf(id)};
+		Cursor cursor = db.rawQuery(sql, params);
 		//将查询的结果添加到对应属性上
 		list = new ArrayList<Friend_Data>();
 		while (cursor.moveToNext()) {
 			Friend_Data friend_Data = new Friend_Data();
 			friend_Data.setId(cursor.getInt(0));
 			friend_Data.setName(cursor.getString(1));
+			friend_Data.setUserid(cursor.getInt(2));
 			list.add(friend_Data);
 		}
 		cursor.close();
@@ -160,15 +162,15 @@ public class Friend_Manage implements Friend_ManageDAO{
 	 * 检测好友重名
 	 */
 	@Override
-	public boolean check(String name) {
+	public boolean check(String name,int id) {
 		//得到一个可读的数据库
 		if (name == null||name.equals("")) {
 			return true;
 		}
 		String namex = null;
 		SQLiteDatabase db = fHelper.getReadableDatabase();
-		String sql = "select *from friend where name = ?";
-		String[] params = new String[]{name};
+		String sql = "select *from friend where name = ? and userid = ?";
+		String[] params = new String[]{name,String.valueOf(id)};
 		Cursor cursor = db.rawQuery(sql, params);
 		while (cursor.moveToNext()) {
 			namex = cursor.getString(1);	

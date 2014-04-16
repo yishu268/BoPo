@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import ruanko.model.bopo.Data;
 import ruanko.model.bopo.Friend_Data;
 import ruanko.service.bopo.Service_Friend;
 
@@ -25,11 +26,14 @@ public class Friend extends Bottom{
 	
 	private Service_Friend service_Friend = null;
 	
+	private Data data = null;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.friend);
 		service_Friend = new Service_Friend(this);
+		data = (Data)getApplication();
 		init();
 	}
 	//重载获取数据
@@ -55,7 +59,7 @@ public class Friend extends Bottom{
 			return;
 		//第一步：获得数据源（model）
 		List<?> friendList = new ArrayList<Friend_Data>();
-		friendList = service_Friend.show();
+		friendList = service_Friend.show(data.getPerson_id());
 		List<HashMap<String, String>> myList = new ArrayList<HashMap<String, String>>();
 		
 		if (friendList != null) {
@@ -65,7 +69,7 @@ public class Friend extends Bottom{
 				//用HashMap做映射
 				HashMap<String, String> map = new HashMap<String, String>();
 				map.put("text", friend_Data.getName());
-				map.put("textid", String.valueOf(friend_Data.getId()));
+				map.put("textid", String.valueOf(friend_Data.getUserid()));
 				myList.add(map);
 			}
 		}

@@ -35,8 +35,8 @@ public class Service_Friend {
 	/*
 	 * 添加好友方法
 	 */
-	public boolean add(Info_Data info_Data){
-		boolean flag = fDao.add(info_Data);
+	public boolean add(Info_Data info_Data,int userid,int friendid){
+		boolean flag = fDao.add(info_Data,userid,friendid);
 		return flag;		
 	}
 	/*
@@ -49,15 +49,15 @@ public class Service_Friend {
 	/*
 	 * 显示好友方法
 	 */
-	public List<?> show(){
-		List<?> list = fDao.show();
+	public List<?> show(int id){
+		List<?> list = fDao.show(id);
 		return list;
 	}
 	/*
 	 * 检测好友重名方法
 	 */
-	public boolean check(String name){
-		boolean flag = fDao.check(name);
+	public boolean check(String name,int id){
+		boolean flag = fDao.check(name,id);
 		return flag;
 	}
 

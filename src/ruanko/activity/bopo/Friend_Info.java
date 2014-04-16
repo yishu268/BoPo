@@ -1,5 +1,6 @@
 package ruanko.activity.bopo;
 
+import ruanko.model.bopo.Data;
 import ruanko.model.bopo.Info_Data;
 import ruanko.service.bopo.Service_Friend;
 import android.app.Activity;
@@ -27,11 +28,14 @@ public class Friend_Info extends Activity{
 	
 	private Info_Data info_Data = null;
 	
+	private Data data = null;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.friend_info);
 		service_Friend = new Service_Friend(this);
+		data = (Data)getApplication();
 		init();
 	}
 	//返回按钮点击事件
@@ -41,7 +45,7 @@ public class Friend_Info extends Activity{
 	//加为好友按钮点击事件
 	public void onClick_Add(View view){
 		boolean flag = true;
-		flag = service_Friend.add(info_Data);
+		flag = service_Friend.add(info_Data,data.getPerson_id(),nameid);
 		if (flag) {
 			Toast.makeText(this, "用户添加成功", Toast.LENGTH_SHORT).show();
 		}else {
@@ -68,7 +72,7 @@ public class Friend_Info extends Activity{
 		//Toast.makeText(this, xx, Toast.LENGTH_SHORT).show();
 		info_Data = service_Friend.getId(nameid);
 		load();
-		boolean flag = service_Friend.check(info_Data.getName());
+		boolean flag = service_Friend.check(info_Data.getName(),data.getPerson_id());
 		if (flag) {
 			
 		}else {

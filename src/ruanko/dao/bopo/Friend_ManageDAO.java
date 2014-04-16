@@ -11,12 +11,12 @@ public interface Friend_ManageDAO {
 	
 	public int name(String name);
 	
-	public boolean add(Info_Data info_Data);
+	public boolean add(Info_Data info_Data,int userid,int friendid);
 	
 	public Info_Data getId(int id);
 	
-	public List<?> show();
+	public List<?> show(int id);
 	
-	public boolean check(String name);
+	public boolean check(String name,int id);
 	
 }

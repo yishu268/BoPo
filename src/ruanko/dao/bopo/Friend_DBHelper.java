@@ -18,7 +18,7 @@ public class Friend_DBHelper extends SQLiteOpenHelper{
 	public void onCreate(SQLiteDatabase db) {
 		//创建一张表储存好友信息
 		String sql = "create table friend("+"_id integer primary key autoincrement,"
-				+"name text,"+"remark text)";
+				+"name text,"+"userid text,"+"friendid text,"+"remark text)";
 		db.execSQL(sql);
 	}
 
