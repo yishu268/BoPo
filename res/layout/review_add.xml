@@ -18,21 +18,16 @@
 	    android:paddingTop="20dp"
 	    android:paddingRight="20dp" >
 
-		<LinearLayout 
+		<LinearLayout
 		    android:layout_width="fill_parent"
 		    android:layout_height="wrap_content"
-		    android:orientation="vertical">
-		
-			<TextView
-			    android:layout_width="fill_parent"
-		        android:layout_height="wrap_content"
-		        android:layout_marginBottom="20dp"
-		        android:text="@string/title"/>
-			
-			<TextView
-			    android:layout_width="fill_parent"
-		        android:layout_height="150dp"
-		        android:text="@string/test"/>
+		    android:layout_marginBottom="50dp">
+		    
+		    <ListView
+		        android:id="@+id/review_list"
+		        android:layout_width="fill_parent"
+		        android:layout_height="fill_parent">	        
+		    </ListView>
 		</LinearLayout>
 		
 		<RelativeLayout

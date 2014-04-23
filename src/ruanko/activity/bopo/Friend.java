@@ -8,15 +8,20 @@ import ruanko.model.bopo.Data;
 import ruanko.model.bopo.Friend_Data;
 import ruanko.service.bopo.Service_Friend;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Toast;
+import android.widget.AdapterView.OnItemLongClickListener;
 
 //好友界面（Friend）
 public class Friend extends Bottom{
@@ -27,6 +32,10 @@ public class Friend extends Bottom{
 	private Service_Friend service_Friend = null;
 	
 	private Data data = null;
+	
+	private String fid = null;
+	
+	public static final int OPTION_DIALOG = 1;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -60,16 +69,17 @@ public class Friend extends Bottom{
 		//第一步：获得数据源（model）
 		List<?> friendList = new ArrayList<Friend_Data>();
 		friendList = service_Friend.show(data.getPerson_id());
-		List<HashMap<String, String>> myList = new ArrayList<HashMap<String, String>>();
+		List<HashMap<String, Object>> myList = new ArrayList<HashMap<String, Object>>();
 		
 		if (friendList != null) {
 			for (int i = 0; i < friendList.size(); i++) {
 				Friend_Data friend_Data = (Friend_Data)friendList.get(i);
-				Toast.makeText(this, String.valueOf(friendList.size()), Toast.LENGTH_SHORT).show();
+				//Toast.makeText(this, String.valueOf(friendList.size()), Toast.LENGTH_SHORT).show();
 				//用HashMap做映射
-				HashMap<String, String> map = new HashMap<String, String>();
+				HashMap<String, Object> map = new HashMap<String, Object>();
+				map.put("head", data.getImage()[Integer.parseInt(friend_Data.getImage())]);
 				map.put("text", friend_Data.getName());
-				map.put("textid", String.valueOf(friend_Data.getUserid()));
+				map.put("textid", String.valueOf(friend_Data.getFriendid()));
 				myList.add(map);
 			}
 		}
@@ -77,8 +87,8 @@ public class Friend extends Bottom{
 		SimpleAdapter adapter = new SimpleAdapter(this, 
 				myList, //数据来源
 				R.layout.friend_list_item, //ListView的XML实现
-				new String[]{"text","textid"}, //动态数组与name对应的子项
-				new int[]{R.id.text,R.id.textid});
+				new String[]{"head","text","textid"}, //动态数组与name对应的子项
+				new int[]{R.id.head,R.id.text,R.id.textid});
 		friend_list.setAdapter(adapter);
 		//为ListView添加点击事件
 		friend_list.setOnItemClickListener(new OnItemClickListener() {
@@ -93,5 +103,70 @@ public class Friend extends Bottom{
 				startActivity(intent);
 			}
 		});
+		friend_list.setOnItemLongClickListener(new OnItemLongClickListener() {
+
+			@SuppressWarnings("deprecation")
+			@Override
+			public boolean onItemLongClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				TextView text = (TextView)view.findViewById(R.id.textid);
+				fid = text.getText().toString();
+				//Toast.makeText(Friend.this, "111", Toast.LENGTH_SHORT).show();
+				showDialog(OPTION_DIALOG);
+
+				return false;
+			}
+		});
+	}
+	protected Dialog onCreateDialog(int id) {
+
+		Dialog dialog;
+		switch (id) {
+		case OPTION_DIALOG:
+			dialog = opDialog();
+			break;
+
+		default:
+			dialog = null;
+		}
+		return dialog;
+	}
+	private Dialog opDialog(){
+		final Dialog opDialog;
+		View opDialogView = null;
+		LayoutInflater li = LayoutInflater.from(this);
+		opDialogView = li.inflate(R.layout.option_dialog, null);
+		
+		opDialog = new AlertDialog.Builder(this).setView(opDialogView).create();
+		
+		Button delete = (Button)opDialogView.findViewById(R.id.delete);
+		Button info = (Button)opDialogView.findViewById(R.id.info);
+		
+		delete.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+
+				service_Friend.delete(data.getPerson_id(), Integer.parseInt(fid));
+				opDialog.dismiss();
+				init();
+			}
+			
+		});
+		
+		info.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+
+				Intent intent = new Intent(Friend.this, Friend_Info_V.class);
+				intent.putExtra("id", fid);
+				opDialog.dismiss();
+				startActivity(intent);
+			}
+			
+		});
+		
+		return opDialog;	
 	}
 }

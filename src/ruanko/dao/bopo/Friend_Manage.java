@@ -92,9 +92,9 @@ public class Friend_Manage implements Friend_ManageDAO{
 		SQLiteDatabase db = fHelper.getWritableDatabase();
 		if (info_Data!=null) {
 			//向好友数据库中插入好友信息
-			String sql = "insert into friend(name, userid, friendid, remark) values "
-					+"(?,?,?,?)";
-			Object[] params = new Object[]{info_Data.getName(),String.valueOf(userid),String.valueOf(friendid),test};
+			String sql = "insert into friend(image, name, userid, friendid, remark) values "
+					+"(?,?,?,?,?)";
+			Object[] params = new Object[]{info_Data.getImage(),info_Data.getName(),String.valueOf(userid),String.valueOf(friendid),test};
 			db.execSQL(sql, params);
 			db.close();
 			return true;
@@ -150,13 +150,31 @@ public class Friend_Manage implements Friend_ManageDAO{
 		while (cursor.moveToNext()) {
 			Friend_Data friend_Data = new Friend_Data();
 			friend_Data.setId(cursor.getInt(0));
-			friend_Data.setName(cursor.getString(1));
-			friend_Data.setUserid(cursor.getInt(2));
+			friend_Data.setImage(cursor.getString(1));
+			friend_Data.setName(cursor.getString(2));
+			friend_Data.setFriendid(cursor.getInt(4));
 			list.add(friend_Data);
 		}
 		cursor.close();
 		db.close();
 		return list;
+	}
+	/*
+	 * 
+	 */
+	public boolean delete(int userid,int friendid){
+		if (userid != 0 && friendid != 0) {
+			SQLiteDatabase db = fHelper.getWritableDatabase();
+			String sql = "delete from friend where userid = ? and friendid = ?";
+			//String sql = "delete *from friend where userid = ?";
+			String[] params = new String[]{String.valueOf(userid),String.valueOf(friendid)};
+			//String[] params = new String[]{String.valueOf(userid)};
+			db.execSQL(sql,params);
+			db.close();
+			return true;
+		}else {
+			return false;
+		}	
 	}
 	/*
 	 * 检测好友重名
@@ -173,7 +191,7 @@ public class Friend_Manage implements Friend_ManageDAO{
 		String[] params = new String[]{name,String.valueOf(id)};
 		Cursor cursor = db.rawQuery(sql, params);
 		while (cursor.moveToNext()) {
-			namex = cursor.getString(1);	
+			namex = cursor.getString(2);	
 		}
 		if (namex == null||namex.equals("")) {
 			return true;

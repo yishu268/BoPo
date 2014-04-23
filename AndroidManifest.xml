@@ -9,6 +9,8 @@
         android:targetSdkVersion="18" 
         tools:ignore="OldTargetApi"/>
 
+    <uses-permission android:name="android.permission.INTERNET"  ></uses-permission>
+    
     <application
         android:name="ruanko.model.bopo.Data"
         android:allowBackup="true"
@@ -49,6 +51,7 @@
         <activity android:name=".Friend_Add_Condition"/>
         <activity android:name=".Friend_Add_Result"/>
         <activity android:name=".Friend_Info"/>
+        <activity android:name=".Friend_Info_V"/>
         <activity android:name=".Friend_Line" android:launchMode="singleTask"/>
         <activity android:name=".Friend_Node" android:launchMode="singleTask"/>
         

@@ -1,5 +1,9 @@
 package ruanko.activity.bopo;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 import ruanko.model.bopo.Info_Data;
 import ruanko.service.bopo.Service_Friend;
 import android.app.Activity;
@@ -8,8 +12,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -59,17 +63,21 @@ public class Friend_Add_Result extends Activity{
 		}
 		
 		Info_Data info_Data = new Info_Data();
-		String[] name = new String[id.length];
 		
+		
+		List<HashMap<String, String>> myList = new ArrayList<HashMap<String, String>>();
 		for (int i = 0; i < id.length; i++) {
 			info_Data = sFriend.getId(Integer.valueOf(id[i]).intValue());
-			name[i] = info_Data.getName();
+			HashMap<String, String> map = new HashMap<String, String>();
+			map.put("text", info_Data.getName());
+			map.put("textid", String.valueOf(info_Data.getId()));
+			myList.add(map);
 		}
-		Toast.makeText(this, id[0], Toast.LENGTH_SHORT).show();
-		
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-				R.layout.friend_list_item,name);
-		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		SimpleAdapter adapter = new SimpleAdapter(this, 
+				myList, //数据来源
+				R.layout.friend_list_item, //ListView的XML实现
+				new String[]{"text","textid"}, //动态数组与name对应的子项
+				new int[]{R.id.text,R.id.textid});
 		result.setAdapter(adapter);
 		//为ListView添加点击事件
 		result.setOnItemClickListener(new OnItemClickListener() {
@@ -77,7 +85,7 @@ public class Friend_Add_Result extends Activity{
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-				TextView text = (TextView)arg1.findViewById(R.id.text);
+				TextView text = (TextView)arg1.findViewById(R.id.textid);
 				String name = text.getText().toString();
 				int name_id = Integer.valueOf(name).intValue(); 
 			    //Toast.makeText(Friend_Add_Result.this, name, Toast.LENGTH_SHORT).show();

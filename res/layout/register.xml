@@ -31,10 +31,12 @@
             	<EditText
                 	android:id="@+id/name"
                 	android:layout_width="fill_parent"
-                	android:layout_height="45dp"
-                	android:layout_marginBottom="3dp"
+                	android:layout_height="fill_parent"
+                	android:textSize="14sp"
+                	android:maxLines="20"
                 	android:background="@drawable/edit_corners_all"
-                	android:hint="@string/input_name" />
+                	android:hint="@string/input_name"
+                	android:digits="abcdefghijklmnopqrstuvwxyz01234567890" />
             
 	            <ImageView
 	                android:id="@+id/error_1"
@@ -51,6 +53,7 @@
                 android:id="@+id/password"
                 android:layout_width="fill_parent"
                 android:layout_height="45dp"
+                android:textSize="14sp"
                 android:layout_marginBottom="3dp"
                 android:background="@drawable/edit_corners_all"
                 android:hint="@string/input_password"
@@ -66,6 +69,7 @@
 	                android:id="@+id/repassword"
 	                android:layout_width="fill_parent"
 	                android:layout_height="fill_parent"
+	                android:textSize="14sp"
 	                android:background="@drawable/edit_corners_all"
 	                android:hint="@string/re_password"
 	                android:inputType="textPassword"/>
@@ -81,12 +85,29 @@
 	                tools:ignore="ContentDescription" />
             </RelativeLayout>
 
-            <EditText
-                android:id="@+id/mail"
-                android:layout_width="fill_parent"
-                android:layout_height="45dp"
-                android:background="@drawable/edit_corners_all"
-                android:hint="@string/input_mail"/>
+			<RelativeLayout 
+			    android:layout_width="fill_parent"
+			    android:layout_height="45dp"
+			    android:orientation="horizontal">
+	            
+	            <EditText
+	                android:id="@+id/mail"
+	                android:layout_width="fill_parent"
+	                android:layout_height="fill_parent"
+	                android:textSize="14sp"
+	                android:background="@drawable/edit_corners_all"
+	                android:hint="@string/input_mail"/>
+	            
+	            <ImageView
+	                android:id="@+id/error_2"
+	                android:layout_width="20dp"
+	                android:layout_height="20dp"
+	                android:layout_alignParentRight="true"
+	                android:layout_centerVertical="true"
+	                android:layout_marginRight="10dp"
+	                android:src="@drawable/error"
+	                tools:ignore="ContentDescription" />
+	        </RelativeLayout>
         </LinearLayout>
 
         <LinearLayout

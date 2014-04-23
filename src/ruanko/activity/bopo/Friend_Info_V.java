@@ -6,14 +6,12 @@ import ruanko.service.bopo.Service_Friend;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-//个人信息界面（Info）
-public class Info extends Activity{
-	//声明控件
+public class Friend_Info_V extends Activity{
+	
 	private TextView name = null;
 	private TextView gender = null;
 	private TextView phone = null;
@@ -27,44 +25,18 @@ public class Info extends Activity{
 	private Data data = null;
 	
 	private Service_Friend service_Friend = null;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.info);
-		service_Friend = new Service_Friend(this);
+		setContentView(R.layout.friend_info_v);
 		data = (Data)getApplication();
+		service_Friend = new Service_Friend(this);
 		init();
-	}
-	//重载获取数据
-	@Override  
-	protected void onNewIntent(Intent intent) {        
-	    super.onNewIntent(intent);  
-	    setIntent(intent);
-		load();
-	    //here we can use getIntent() to get the extra data.
-	}
-	
-	//手机返回按钮点击事件
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_BACK&&event.getRepeatCount() == 0) {
-			Intent intent = new Intent(this,Line.class);
-			startActivity(intent);
-			finish();
-			return false;
-		}
-		return false;	
-	}
-	
-	//修改按钮点击事件
-	public void onClick_Change(View view){
-		Intent intent = new Intent(this,Info_Change.class);
-		startActivity(intent);
 	}
 	//返回按钮点击事件
 	public void onClick_Back(View view){
-		Intent intent = new Intent(this,Line.class);
+		Intent intent = new Intent(this,Friend.class);
 		startActivity(intent);
 		finish();
 	}
@@ -79,12 +51,16 @@ public class Info extends Activity{
 		mail = (TextView)findViewById(R.id.mail);
 		head = (ImageView)findViewById(R.id.head);
 		load();
+		
 	}
 	//载入数据
 	private void load(){
+		Intent intent = getIntent();
+		Bundle bundle = intent.getExtras();
+		String id = bundle.getString("id");
+		
 		Info_Data info_Data = new Info_Data();
-		info_Data =  service_Friend.getId(data.getPerson_id());
-		int head1 = Integer.parseInt(info_Data.getImage());
+		info_Data =  service_Friend.getId(Integer.parseInt(id));
 
 		name.setText(info_Data.getName());
 		gender.setText(info_Data.getGender());
@@ -93,6 +69,7 @@ public class Info extends Activity{
 		birth.setText(info_Data.getBirth());
 		age.setText(info_Data.getAge());
 		mail.setText(info_Data.getMail());
-		head.setImageResource(data.getImage()[head1]);
+		head.setImageResource(data.getImage()[data.getHead_id()]);
 	}
+
 }

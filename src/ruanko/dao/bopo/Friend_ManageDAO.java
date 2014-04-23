@@ -19,4 +19,6 @@ public interface Friend_ManageDAO {
 	
 	public boolean check(String name,int id);
 	
+	public boolean delete(int userid,int friendid);
+	
 }

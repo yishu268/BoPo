@@ -3,6 +3,7 @@ package ruanko.model.bopo;
 public class Friend_Data {
 
 	private int id;
+	private String image = null;
 	private String name = null;
 	private int userid;
 	private int friendid;
@@ -10,6 +11,7 @@ public class Friend_Data {
 	
 	public Friend_Data(){
 		id = 0;
+		image = "";
 		name = "";
 		userid = 0;
 		friendid = 0;
@@ -24,6 +26,13 @@ public class Friend_Data {
 		this.id = id;
 	}
 
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
 
 	public String getName() {
 		return name;

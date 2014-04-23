@@ -52,4 +52,11 @@ public class Service_User {
 		boolean flag = uerDao.check(name);
 		return flag;
 	}
+	/*
+	 * ²éÕÒÍ·Ïñ
+	 */
+	public String head(int id){
+		String head = uerDao.head(id);
+		return head;
+	}
 }

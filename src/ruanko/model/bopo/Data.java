@@ -13,6 +13,8 @@ public class Data extends Application{
 	private int person_id = 0;
 	
 	private int head_id = 0;
+	
+	private String node_id = "";
 
 	public int getPerson_id() {
 		return person_id;
@@ -37,5 +39,13 @@ public class Data extends Application{
 	public void setHead_id(int head_id) {
 		this.head_id = head_id;
 	}
-	
+
+	public String getNode_id() {
+		return node_id;
+	}
+
+	public void setNode_id(String node_id) {
+		this.node_id = node_id;
+	}
+
 }

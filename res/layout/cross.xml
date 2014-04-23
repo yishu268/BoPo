@@ -18,6 +18,13 @@
         	android:calendarViewShown="false"
         	android:layout_width="match_parent"
         	android:layout_height="wrap_content"/>
+	    <EditText 
+	        android:id="@+id/dateEt"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:cursorVisible="false"
+            android:editable="false"
+            android:textSize="14sp"/>
 		<Button
 	            android:id="@+id/Go"
 	            android:onClick="onClick_Go"

@@ -28,10 +28,6 @@
 		    	android:background="#CCCCCC"/>
 		</LinearLayout>
 		
-		<View
-			android:layout_width="fill_parent"    
-		    android:layout_height="1px"
-		    android:background="#CCCCCC"/>
 		<LinearLayout
 		    android:layout_width="fill_parent"
 		    android:layout_height="wrap_content"

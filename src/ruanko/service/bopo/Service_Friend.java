@@ -60,5 +60,9 @@ public class Service_Friend {
 		boolean flag = fDao.check(name,id);
 		return flag;
 	}
+	public boolean delete(int userid,int friendid){
+		boolean flag = fDao.delete(userid, friendid);
+		return flag;
+	}
 
 }

@@ -5,6 +5,7 @@
     android:layout_height="fill_parent" >
 
     <LinearLayout
+        android:id="@+id/xx"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="20dp"
@@ -42,6 +43,21 @@
         </LinearLayout>
     </LinearLayout>
 
+    <ScrollView 
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@id/xx"
+	    android:layout_marginBottom="50dp">
+    
+	    <LinearLayout 
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	            
+	        android:id="@+id/timelayout"
+	        android:orientation="vertical">
+	    </LinearLayout>
+    </ScrollView>
+    
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

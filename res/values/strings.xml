@@ -5,6 +5,7 @@
     <string name="action_settings">Settings</string>
     <string name="win_theme">@android:style/Theme.Light.NoTitleBar</string>
     <string name="test">此处文字为代替内容</string>
+    <string name="info">详细信息</string>
     
     <!-- back_part -->
     <string name="back">&lt; 返回</string>
@@ -19,7 +20,7 @@
     <string name="find">找回</string>
     
     <!-- register -->
-    <string name="input_name">请输入用户名</string>
+    <string name="input_name">请输入用户名（只能是字母或者数字）</string>
     <string name="input_password">请输入密码</string>
     <string name="re_password">再次确认密码</string>
     <string name="input_mail">请输入邮箱</string>

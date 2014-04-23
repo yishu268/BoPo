@@ -165,14 +165,6 @@
 	                android:layout_height="wrap_content"
 	                android:text="@string/test" />
 	        </LinearLayout>
-	
-	        <Button
-	            android:id="@+id/change"
-	            android:onClick="onClick_Change"
-	            android:layout_width="fill_parent"
-	            android:layout_height="45dp"
-	            android:background="@drawable/button_corners_all"
-	            android:text="@string/change_info" />
 	    </LinearLayout>
     </ScrollView>
 </LinearLayout>

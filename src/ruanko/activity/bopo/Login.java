@@ -1,7 +1,7 @@
 package ruanko.activity.bopo;
 
 import ruanko.model.bopo.Data;
-import ruanko.service.bopo.Service_User;
+import ruanko.util.bopo.HttpUtil;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -16,7 +16,7 @@ public class Login extends Activity {
 	private EditText user = null;
 	private EditText password = null;
 	
-	private Service_User service_User = null;
+	//private Service_User service_User = null;
 	
 	private Data data;
 	
@@ -24,7 +24,8 @@ public class Login extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.login);
-		service_User = new Service_User(this);
+				
+		//service_User = new Service_User(this);
 		data = (Data)getApplication();
 		init();
 	}
@@ -55,21 +56,28 @@ public class Login extends Activity {
 	private void getContent(){
 		String user_db = user.getText().toString();
 		String password_db = password.getText().toString();
-		int flag = service_User.login(user_db,password_db);
 		
-		data.setPerson_id(flag);
-		//String xx = "";
-		//xx = String.valueOf(flag);
+		String xx = query(user_db, password_db);
 		
 		//Toast.makeText(this, xx, Toast.LENGTH_SHORT).show();
-		//boolean flag = true;
-		if (flag > 0) {
+		int id = Integer.parseInt(xx);
+		if (user_db.equals("")||user_db == null) {
+			Toast.makeText(this, "请输入用户名", Toast.LENGTH_SHORT).show();
+		}else if (id == 0) {
+			Toast.makeText(this, "用户名或密码错误", Toast.LENGTH_SHORT).show();
+		}else{
+			data.setPerson_id(id);
+			
 			Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
 			Intent intent = new Intent(this,Line.class);
 			startActivity(intent);
 			finish();
-		}else {
-			Toast.makeText(this, "登录失败", Toast.LENGTH_SHORT).show();
 		}
 	}
+	private String query(String username,String password){
+		String queryString = "userName="+username+"&userPwd="+password;
+		String url = HttpUtil.BASE_URL+"servlet/userLoginServlet?"+queryString;
+		return HttpUtil.queryStringForPost(url);
+    }
+	
 }

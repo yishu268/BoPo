@@ -8,7 +8,8 @@ import ruanko.model.bopo.Info_Data;
 public class User_Manage implements User_ManageDAO{
 	
 	private Info_DBHelper iHelper = null;
-	private Info_Test_DBHelper tHelper = null;
+	private Friend_DBHelper fHelper = null;
+	//private Info_Test_DBHelper tHelper = null;
 	
 	private String pass = "";
 	private int id = 0;
@@ -19,7 +20,8 @@ public class User_Manage implements User_ManageDAO{
 	 */
 	public User_Manage(Context context){
 		iHelper = new Info_DBHelper(context);
-		tHelper = new Info_Test_DBHelper(context);
+		fHelper = new Friend_DBHelper(context);
+		//tHelper = new Info_Test_DBHelper(context);
 	}
 	
 	/*
@@ -27,11 +29,10 @@ public class User_Manage implements User_ManageDAO{
 	 */
 	@Override
 	public int login(String user,String password) {
-		
-		if (user.equals("")||user == null) {
+
+		if (password.equals("")||password == null) {
 			return 0;
 		}
-		
 		//得到一个可读的数据库
 		SQLiteDatabase db = iHelper.getReadableDatabase();
 		//查询用户名对应的密码
@@ -51,6 +52,7 @@ public class User_Manage implements User_ManageDAO{
 		}else {
 			return 0;
 		}
+	
 	}
 	
 	/*
@@ -62,11 +64,12 @@ public class User_Manage implements User_ManageDAO{
 		SQLiteDatabase db = iHelper.getWritableDatabase();
 		if (info_Data!=null) {
 			//
+			String image = "0";
 			//向个人信息数据库中插入个人信息
-			String sql = "insert into info(name, password, mail) values "
-					+"(?,?,?)";
+			String sql = "insert into info(name, password, mail, image) values "
+					+"(?,?,?,?)";
 			Object[] params = new Object[]{info_Data.getName(),
-					info_Data.getPassword(),info_Data.getMail()};
+					info_Data.getPassword(),info_Data.getMail(),image};
 			db.execSQL(sql, params);
 			//关闭数据库
 			db.close();
@@ -95,12 +98,21 @@ public class User_Manage implements User_ManageDAO{
 			SQLiteDatabase db = iHelper.getWritableDatabase();
 			//修改数据表中对应的联系人信息
 			String sql ="update info set gender = ?, phone = ?,"
-					+"location = ?, birth = ?, age = ? where _id = ?";
+					+"location = ?, birth = ?, age = ?, image = ?,"
+					+"mail = ? where _id = ?"					;
 			Object[] params = new Object[]{info_Data.getGender(),
 					info_Data.getPhone(),info_Data.getLocation(),
-					info_Data.getBirth(),info_Data.getAge(),info_Data.getId()};
+					info_Data.getBirth(),info_Data.getAge(),info_Data.getImage(),
+					info_Data.getMail(),info_Data.getId()};
 			db.execSQL(sql, params);
 			db.close();
+			
+			SQLiteDatabase db1 = fHelper.getWritableDatabase();
+			//修改数据表中对应的联系人信息
+			String sql1 ="update friend set image = ?"					;
+			Object[] params1 = new Object[]{info_Data.getImage()};
+			db1.execSQL(sql1, params1);
+			db1.close();
 			return true;
 		}else {
 			return false;
@@ -114,7 +126,7 @@ public class User_Manage implements User_ManageDAO{
 	@Override
 	public void input(Info_Data info_Data) {
 		//得到一个可写的数据库
-		SQLiteDatabase db = tHelper.getWritableDatabase();
+		SQLiteDatabase db = iHelper.getWritableDatabase();
 		//向个人信息数据库中插入个人信息
 		String sql = "insert into info_test(name, password, mail, gender,"
 				+"phone, image, location, age, birth) values "
@@ -150,6 +162,23 @@ public class User_Manage implements User_ManageDAO{
 			return true;
 		}else {
 			return false;
+		}
+	}
+
+	@Override
+	public String head(int id) {
+		if (id != 0) {
+			String head = "";
+			SQLiteDatabase db = iHelper.getReadableDatabase();
+			String sql = "select *from info where _id = ?";
+			String[] params = new String[]{String.valueOf(id)};
+			Cursor cursor = db.rawQuery(sql, params);
+			while (cursor.moveToNext()) {
+				head = cursor.getString(6);				
+			}
+			return head;
+		}else {
+			return null;
 		}
 	}
 }

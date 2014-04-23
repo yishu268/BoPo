@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +20,8 @@ public class Friend_Info extends Activity{
 	private TextView gender = null;
 	private TextView location = null;
 	private TextView mail = null;
+	
+	private ImageView head = null;
 	
 	private Button add = null;
 	
@@ -62,6 +65,7 @@ public class Friend_Info extends Activity{
 		gender = (TextView)findViewById(R.id.gender);
 		location = (TextView)findViewById(R.id.location);
 		mail = (TextView)findViewById(R.id.mail);
+		head = (ImageView)findViewById(R.id.head);
 		add = (Button)findViewById(R.id.add);
 		
 		//接受传过来的id
@@ -76,18 +80,18 @@ public class Friend_Info extends Activity{
 		if (flag) {
 			
 		}else {
-			Toast.makeText(this, "该用户已经是你的好友", Toast.LENGTH_LONG).show();
+			Toast.makeText(this, "该用户已经是你的好友", Toast.LENGTH_SHORT).show();
 			add.setEnabled(false);
 		}
 	}
 	//将数据显示到界面上
 	private void load() {
 
-		
 		name.setText(info_Data.getName());
 		gender.setText(info_Data.getGender());
 		location.setText(info_Data.getName());
 		mail.setText(info_Data.getMail());
+		head.setImageResource(data.getImage()[Integer.parseInt(info_Data.getImage())]);
 
 	}
 }

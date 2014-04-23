@@ -23,12 +23,20 @@ public class Friend_Line extends Activity{
 	private ListView line = null;
 	
 	private Service_Node service_Node = null;
+	//private Service_Friend service_Friend = null;
+	
+	//private Data data = null;
+	
+	private String id = null;
+	//private String id2 = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.friend_line);
 		service_Node = new Service_Node(this);
+		//service_Friend = new Service_Friend(this);
+		//data = (Data)getApplication();
 		init();
 	}
 	//返回按钮点击事件
@@ -40,12 +48,14 @@ public class Friend_Line extends Activity{
 		Intent intent = new Intent(this,Friend_Node.class);
 		startActivity(intent);
 	}
+	//Dialog
+	
 	//初始化
 	private void init(){
 		line = (ListView)findViewById(R.id.line);
 		Intent intent = getIntent();
 		Bundle bundle = intent.getExtras();
-		String id = bundle.getString("id");
+		id = bundle.getString("id");
 		Toast.makeText(this, id, Toast.LENGTH_SHORT).show();
 		
 		List<?> list = service_Node.line(Integer.parseInt(id));
@@ -76,9 +86,9 @@ public class Friend_Line extends Activity{
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				TextView text = (TextView)arg1.findViewById(R.id.textid);
-				String id = text.getText().toString();
+				String id1 = text.getText().toString();
 				Intent intent = new Intent(Friend_Line.this,Friend_Node.class);
-				intent.putExtra("id", id);
+				intent.putExtra("id", id1);
 				startActivity(intent);
 			}
 		});

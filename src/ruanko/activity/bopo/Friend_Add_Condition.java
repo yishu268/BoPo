@@ -40,18 +40,13 @@ public class Friend_Add_Condition extends Activity{
 		String age_db = age.getText().toString();
 		String gender_db = rButton.getText().toString();
 		String location_db = location.getSelectedItem().toString();
-		String gender_dbs = "";
-		if (gender_db.equals("ƒ–")) {
-			gender_dbs = "female";
-		}else if (gender_db.equals("≈Æ")) {
-			gender_dbs = "male";
-		}
 		if (age_db.equals("")||age_db == null) {
 			Toast.makeText(this, "«Î ‰»ÎƒÍ¡‰", Toast.LENGTH_SHORT).show();
 		}else {
-			List<?> list = service_Friend.condition(age_db, gender_dbs, location_db);
+			List<?> list = service_Friend.condition(age_db, gender_db, location_db);
 			
 			int size = list.size();
+
 			String[] array = new String[size];
 			array = (String[])list.toArray(array);
 			if(size == 0){
