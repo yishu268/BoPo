@@ -1,15 +1,14 @@
 package ruanko.activity.bopo;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
 //添加好友界面（Friend_Add）
-public class Friend_Add extends Activity{
+public class Friend_Add extends Bottom{
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.friend_add);
 	}

@@ -1,7 +1,6 @@
 package ruanko.util.bopo;
 
 import java.io.IOException;
-
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpGet;
@@ -11,7 +10,7 @@ import org.apache.http.util.EntityUtils;
 
 public class HttpUtil {
 	
-	public static final String BASE_URL="http://115.156.249.115:8080/BoPo_Web_20140404/";
+	public static final String BASE_URL="http://115.156.249.21:8080/BoPo_Web_20140404/";
 	
 	public static HttpGet getHttpGet(String url){
 		HttpGet request = new HttpGet(url);
@@ -35,6 +34,7 @@ public class HttpUtil {
 	
 	
 	public static String queryStringForPost(String url){
+		//HttpEntity entity = new UrlEncodedFormEntity(url, HTTP.UTF_8);
 		HttpPost request = HttpUtil.getHttpPost(url);
 		String result = null;
 		try {
@@ -45,11 +45,13 @@ public class HttpUtil {
 			}
 		} catch (ClientProtocolException e) {
 			e.printStackTrace();
-			result = "ÍøÂçÓÐÎÊÌâ£¡";
+			result = "ÍøÂç×´Ì¬Òì³££¡";
+			//result = null;
 			return result;
 		} catch (IOException e) {
 			e.printStackTrace();
-			result = "ÍøÂçÒì³£2£¡";
+			result = "ÍøÂç×´Ì¬Òì³££¡";
+			//result = null;
 			return result;
 		}
         return null;
@@ -57,6 +59,7 @@ public class HttpUtil {
 	
 	public static String queryStringForPost(HttpPost request){
 		String result = null;
+		
 		try {
 			HttpResponse response = HttpUtil.getHttpResponse(request);
 			if(response.getStatusLine().getStatusCode()==200){

@@ -9,7 +9,6 @@ import java.util.List;
 import ruanko.model.bopo.Data;
 import ruanko.model.bopo.Review_Data;
 import ruanko.service.bopo.Service_Review;
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -18,7 +17,7 @@ import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 //添加评论界面（Review_Add）
-public class Review_Add extends Activity{
+public class Review_Add extends Bottom{
 	
 	//声明控件
 	private EditText review = null;
@@ -28,7 +27,7 @@ public class Review_Add extends Activity{
 	private Data data = null;
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.review_add);

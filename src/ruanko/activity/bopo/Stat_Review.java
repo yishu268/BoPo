@@ -1,14 +1,13 @@
 package ruanko.activity.bopo;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 
 //成长回执统计界面（Stat_Review）
-public class Stat_Review extends Activity{
+public class Stat_Review extends Bottom{
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.stat_review);
 	}

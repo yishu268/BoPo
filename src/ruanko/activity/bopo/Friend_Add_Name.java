@@ -1,7 +1,6 @@
 package ruanko.activity.bopo;
 
-import ruanko.service.bopo.Service_Friend;
-import android.app.Activity;
+import ruanko.util.bopo.HttpUtil;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,18 +8,18 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 //通过用户名添加好友界面（Friend_Add_Name）
-public class Friend_Add_Name extends Activity{
+public class Friend_Add_Name extends Bottom{
 
 	//声明控件
 	private EditText name = null;
 	
-	private Service_Friend service_Friend = null;
+	//private Service_Friend service_Friend = null;
 	
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.friend_add_name);
-		service_Friend = new Service_Friend(this);
+		//service_Friend = new Service_Friend(this);
 		
 		name = (EditText)findViewById(R.id.name);//初始化
 	}
@@ -31,9 +30,10 @@ public class Friend_Add_Name extends Activity{
 	//搜索按钮点击事件
 	public void onClick_Search(View view){
 		String name_db = name.getText().toString();
-		int id = service_Friend.name(name_db);
-		//String test = "";
-		//test = String.valueOf(id);
+
+		String getid = query(name_db);
+		int id = Integer.parseInt(getid);
+
 		if (id == -1) {
 			Toast.makeText(this, "请输入用户名", Toast.LENGTH_SHORT).show();
 		}else if (id == 0) {
@@ -45,10 +45,13 @@ public class Friend_Add_Name extends Activity{
 			intent.putExtras(bundle);
 			startActivity(intent);
 			finish();
-		}	
-		//Intent intent = new Intent(this,Friend_Add_Result.class);
-		//startActivity(intent);
-		//finish();
+		}
 	}
+	
+	private String query(String name){
+		String queryString = "userName="+name;
+		String url = HttpUtil.BASE_URL+"servlet/addFBNameServlet?"+queryString;
+		return HttpUtil.queryStringForPost(url);
+    }
 	
 }

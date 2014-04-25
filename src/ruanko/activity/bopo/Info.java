@@ -1,18 +1,20 @@
 package ruanko.activity.bopo;
 
+import org.json.JSONObject;
+
 import ruanko.model.bopo.Data;
 import ruanko.model.bopo.Info_Data;
-import ruanko.service.bopo.Service_Friend;
-import android.app.Activity;
+import ruanko.util.bopo.HttpUtil;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 //个人信息界面（Info）
-public class Info extends Activity{
+public class Info extends Bottom{
 	//声明控件
 	private TextView name = null;
 	private TextView gender = null;
@@ -26,14 +28,14 @@ public class Info extends Activity{
 	
 	private Data data = null;
 	
-	private Service_Friend service_Friend = null;
+	//private Service_Friend service_Friend = null;
 	
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.info);
-		service_Friend = new Service_Friend(this);
+		//service_Friend = new Service_Friend(this);
 		data = (Data)getApplication();
 		init();
 	}
@@ -83,9 +85,27 @@ public class Info extends Activity{
 	//载入数据
 	private void load(){
 		Info_Data info_Data = new Info_Data();
-		info_Data =  service_Friend.getId(data.getPerson_id());
-		int head1 = Integer.parseInt(info_Data.getImage());
+		//info_Data =  service_Friend.getId(data.getPerson_id());
+		//int head1 = Integer.parseInt(info_Data.getImage());
 
+		String json =  query(String.valueOf(data.getPerson_id()));
+		
+		try {
+			JSONObject object = new JSONObject(json);
+			info_Data.setImage(object.getString("userHeadImg"));
+			info_Data.setName(object.getString("userName"));
+			info_Data.setGender(object.getString("userSex"));
+			info_Data.setPhone(object.getString("userMobile"));
+			info_Data.setLocation(object.getString("userPlace"));
+			info_Data.setBirth(object.getString("userBirthday"));
+			info_Data.setAge(object.getString("userAge"));
+			info_Data.setMail(object.getString("userEmail"));
+			//Toast.makeText(this, object.getString("notesTitle"), Toast.LENGTH_SHORT).show();
+			
+		} catch (Exception e) {
+			Toast.makeText(this, "用户信息加载异常", Toast.LENGTH_SHORT).show();
+		}
+		
 		name.setText(info_Data.getName());
 		gender.setText(info_Data.getGender());
 		phone.setText(info_Data.getPhone());
@@ -93,6 +113,12 @@ public class Info extends Activity{
 		birth.setText(info_Data.getBirth());
 		age.setText(info_Data.getAge());
 		mail.setText(info_Data.getMail());
-		head.setImageResource(data.getImage()[head1]);
+		head.setImageResource(data.getImage()[Integer.parseInt(info_Data.getImage())]);
 	}
+	
+	private String query(String id){
+		String queryString = "id="+id;
+		String url = HttpUtil.BASE_URL+"servlet/selectFBIdServlet?"+queryString;
+		return HttpUtil.queryStringForPost(url);
+    }
 }

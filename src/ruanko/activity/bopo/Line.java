@@ -1,13 +1,17 @@
 package ruanko.activity.bopo;
 
+import org.json.JSONObject;
+
 import ruanko.model.bopo.Data;
-import ruanko.service.bopo.Service_User;
+import ruanko.model.bopo.Info_Data;
+import ruanko.util.bopo.HttpUtil;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 //成长轴界面（Line）
 public class Line extends Bottom{
@@ -32,21 +36,24 @@ public class Line extends Bottom{
 	
 	private LinearLayout xxx;
 	
-	private Service_User service_User = null;
+	private Info_Data info_Data = new Info_Data();
+	
+	//private Service_User service_User = null;
 	
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.line);
 		data = (Data)getApplication();
-		service_User = new Service_User(this);
+		//service_User = new Service_User(this);
 		init();
 	}
 	//重载获取数据
 	@Override  
-	protected void onNewIntent(Intent intent) {        
+	protected void onNewIntent(Intent intent) {
 	    super.onNewIntent(intent);  
 	    setIntent(intent);
+	    setContentView(R.layout.line);
 		init();
 	    //here we can use getIntent() to get the extra data.
 	}
@@ -62,8 +69,19 @@ public class Line extends Bottom{
 	}
 	//初始化
 	private void init(){
+		setflag(String.valueOf(data.getPerson_id()));
+		String json =  query(String.valueOf(data.getPerson_id()));
+		
+		try {
+			JSONObject object = new JSONObject(json);
+			info_Data.setImage(object.getString("userHeadImg"));
+			
+		} catch (Exception e) {
+			Toast.makeText(this, "用户信息加载异常", Toast.LENGTH_SHORT).show();
+		}
+		
 		head = (ImageButton)findViewById(R.id.per_infor);
-		head.setImageResource(data.getImage()[Integer.parseInt(service_User.head(data.getPerson_id()))]);
+		head.setImageResource(data.getImage()[Integer.parseInt(info_Data.getImage())]);
 		initLayout();
 	}
 	
@@ -122,14 +140,20 @@ public class Line extends Bottom{
 				tv_content.setTextSize(12);
 				tv_content.setText(yearthis + "-" + month[i][j]);
 				
-				xxx.addView(tv_content);
-				
-			
-				
-				
+				xxx.addView(tv_content);			
 			}
 		}
-
 	}
+	
+	private String query(String id){
+		String queryString = "id="+id;
+		String url = HttpUtil.BASE_URL+"servlet/selectFBIdServlet?"+queryString;
+		return HttpUtil.queryStringForPost(url);
+    }
+	private String setflag(String id){
+		String queryString ="userId="+id;
+		String url = HttpUtil.BASE_URL+"servlet/changeUserFlagServlet?"+queryString;
+		return HttpUtil.queryStringForPost(url);
+    }
 
 }

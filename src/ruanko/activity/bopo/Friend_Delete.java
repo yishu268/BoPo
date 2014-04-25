@@ -2,12 +2,11 @@ package ruanko.activity.bopo;
 
 import ruanko.model.bopo.Info_Data;
 import ruanko.service.bopo.Service_Friend;
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-public class Friend_Delete extends Activity{
+public class Friend_Delete extends Bottom{
 	//ÉùÃ÷¿Ø¼þ
 	private TextView name = null;
 	private TextView gender = null;
@@ -19,7 +18,7 @@ public class Friend_Delete extends Activity{
 	private Service_Friend service_Friend = null;
 	
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.friend_delete);

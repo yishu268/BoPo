@@ -13,7 +13,7 @@ public class Info_Data {
 	private String age = null;
 	private String birth = null;
 	private int node_id;
-	
+	private String loginFlag = null;	
 	
 	public Info_Data(){
 		id = 0;
@@ -27,6 +27,7 @@ public class Info_Data {
 		age = "";
 		birth = "";
 		node_id = 0;
+		loginFlag = "";
 	}
 
 
@@ -137,6 +138,16 @@ public class Info_Data {
 
 	public void setNode_id(int node_id) {
 		this.node_id = node_id;
+	}
+
+
+	public String getLoginFlag() {
+		return loginFlag;
+	}
+
+
+	public void setLoginFlag(String loginFlag) {
+		this.loginFlag = loginFlag;
 	}
 
 }

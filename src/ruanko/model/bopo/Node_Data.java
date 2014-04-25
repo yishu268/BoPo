@@ -4,21 +4,19 @@ public class Node_Data {
 	private int id;
 	private String title;
 	private String type;
-	private String text;
+	private String info;
 	private String date;
 	private String user_id;
-	private String review_id;
-	private String photo;
+	private String image;
 	
 	public Node_Data(){
 		id = 0;
 		title = "";
 		type = "";
-		text = "";
+		info = "";
 		date = "";
 		user_id = "";
-		review_id = "";
-		photo = "";
+		image = "";
 	}
 
 	public int getId() {
@@ -45,12 +43,12 @@ public class Node_Data {
 		this.type = type;
 	}
 
-	public String getText() {
-		return text;
+	public String getInfo() {
+		return info;
 	}
 
-	public void setText(String text) {
-		this.text = text;
+	public void setInfo(String info) {
+		this.info = info;
 	}
 
 	public String getDate() {
@@ -69,20 +67,12 @@ public class Node_Data {
 		this.user_id = user_id;
 	}
 
-	public String getReview_id() {
-		return review_id;
+	public String getImage() {
+		return image;
 	}
 
-	public void setReview_id(String review_id) {
-		this.review_id = review_id;
-	}
-
-	public String getPhoto() {
-		return photo;
-	}
-
-	public void setPhoto(String photo) {
-		this.photo = photo;
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 }

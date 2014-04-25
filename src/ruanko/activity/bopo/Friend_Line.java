@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import ruanko.model.bopo.Line_Data;
-import ruanko.service.bopo.Service_Node;
-import android.app.Activity;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import ruanko.model.bopo.Node_Data;
+import ruanko.util.bopo.HttpUtil;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -18,23 +20,17 @@ import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
 //好友成长轴界面（Friend_Line）
-public class Friend_Line extends Activity{
+public class Friend_Line extends Bottom{
 	//声明控件
 	private ListView line = null;
 	
-	private Service_Node service_Node = null;
-	//private Service_Friend service_Friend = null;
-	
-	//private Data data = null;
-	
-	private String id = null;
-	//private String id2 = null;
+	private String userid = null;
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.friend_line);
-		service_Node = new Service_Node(this);
+		//service_Node = new Service_Node(this);
 		//service_Friend = new Service_Friend(this);
 		//data = (Data)getApplication();
 		init();
@@ -55,20 +51,41 @@ public class Friend_Line extends Activity{
 		line = (ListView)findViewById(R.id.line);
 		Intent intent = getIntent();
 		Bundle bundle = intent.getExtras();
-		id = bundle.getString("id");
-		Toast.makeText(this, id, Toast.LENGTH_SHORT).show();
+		userid = bundle.getString("id");
+		Toast.makeText(this, userid, Toast.LENGTH_SHORT).show();
 		
-		List<?> list = service_Node.line(Integer.parseInt(id));
+		//List<?> list = service_Node.line(Integer.parseInt(id));
+		
+		String json = query(userid);
+		
+		List<Node_Data> nodeList = new ArrayList<Node_Data>();
+
+		try {
+			JSONArray array = new JSONArray(json);
+			for (int i = 0; i < array.length(); i++) {
+				Node_Data node_Data = new Node_Data();
+				JSONObject object = array.getJSONObject(i);
+				node_Data.setId(Integer.parseInt(object.getString("notesId")));
+				node_Data.setTitle(object.getString("notesTitle"));
+				node_Data.setDate(object.getString("notesTime"));
+				nodeList.add(node_Data);
+				
+			//Toast.makeText(this, ff, Toast.LENGTH_SHORT).show();
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			Toast.makeText(this, "好友添加异常！", Toast.LENGTH_SHORT).show();
+		}
 		
 		List<HashMap<String, String>> myList = new ArrayList<HashMap<String, String>>();
 		
-		if (list != null) {
-			for (int i = 0; i < list.size(); i++) {
-				Line_Data line_Data = (Line_Data)list.get(i);
+		if (nodeList != null) {
+			for (int i = 0; i < nodeList.size(); i++) {
+				Node_Data node_Data = nodeList.get(i);
 				//用HashMap做映射
 				HashMap<String, String> map = new HashMap<String, String>();
-				map.put("text", line_Data.getTitle());
-				map.put("textid", String.valueOf(line_Data.getNodeid()));
+				map.put("text", node_Data.getTitle());
+				map.put("textid", String.valueOf(node_Data.getId()));
 				myList.add(map);
 			}
 		}
@@ -93,4 +110,11 @@ public class Friend_Line extends Activity{
 			}
 		});
 	}
+	
+	private String query(String id){
+		String queryString = "id="+id;
+		String url = HttpUtil.BASE_URL+"servlet/getUserNotesListServlet?"+queryString;
+		return HttpUtil.queryStringForPost(url);
+    }
+	
 }

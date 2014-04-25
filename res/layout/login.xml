@@ -31,32 +31,18 @@
                 android:id="@+id/user"
                 android:layout_width="fill_parent"
                 android:layout_height="45dp"
+                android:singleLine="true"
                 android:background="@drawable/edit_corners_top"
                 android:hint="@string/user_name"
                 android:saveEnabled="true" />
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="45dp"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="1dp"
-                android:gravity="center" >
-
-                <ImageButton
-                    android:id="@+id/user_button"
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:scaleType="center"
-                    android:src="@drawable/user_list_down"
-                    tools:ignore="ContentDescription" />
-            </LinearLayout>
         </RelativeLayout>
 
         <EditText
             android:id="@+id/password"
             android:layout_width="fill_parent"
             android:layout_height="45dp"
+            android:singleLine="true"
             android:background="@drawable/edit_corners_bottom"
             android:hint="@string/password"
             android:inputType="textPassword" />

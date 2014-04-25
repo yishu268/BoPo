@@ -1,15 +1,14 @@
 package ruanko.activity.bopo;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
 //成长信息修改界面（Node_Change）
-public class Node_Change extends Activity{
+public class Node_Change extends Bottom{
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.node_change);

@@ -1,15 +1,14 @@
 package ruanko.activity.bopo;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
 //数据统计界面（Stat）
-public class Stat extends Activity{
+public class Stat extends Bottom{
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.stat);
 	}

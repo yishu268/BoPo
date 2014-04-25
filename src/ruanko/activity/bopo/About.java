@@ -1,14 +1,13 @@
 package ruanko.activity.bopo;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 
 //关于我们界面（About）
-public class About extends Activity{
+public class About extends Bottom{
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.about);

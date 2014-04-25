@@ -1,9 +1,16 @@
 package ruanko.activity.bopo;
 
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
 
-import ruanko.service.bopo.Service_Friend;
-import android.app.Activity;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
+
+import ruanko.util.bopo.HttpUtil;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -14,20 +21,21 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 //按条件添加好友界面（Friend_Add_Condition）
-public class Friend_Add_Condition extends Activity{
+public class Friend_Add_Condition extends Bottom{
 
 	//声明控件
 	private EditText age = null;
 	private RadioGroup gender = null;
 	private Spinner location = null;
 	
-	private Service_Friend service_Friend = null;
+	private List<NameValuePair> list = null;
+	//private Service_Friend service_Friend = null;
 	
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.friend_add_condition);
-		service_Friend = new Service_Friend(this);
+		//service_Friend = new Service_Friend(this);
 		init();
 	}
 	//返回按钮点击事件
@@ -36,26 +44,20 @@ public class Friend_Add_Condition extends Activity{
 	}
 	//搜索按钮点击事件
 	public void onClick_Search(View view){
-		RadioButton rButton = (RadioButton)findViewById(gender.getCheckedRadioButtonId());
+
 		String age_db = age.getText().toString();
-		String gender_db = rButton.getText().toString();
-		String location_db = location.getSelectedItem().toString();
+
 		if (age_db.equals("")||age_db == null) {
 			Toast.makeText(this, "请输入年龄", Toast.LENGTH_SHORT).show();
 		}else {
-			List<?> list = service_Friend.condition(age_db, gender_db, location_db);
 			
-			int size = list.size();
-
-			String[] array = new String[size];
-			array = (String[])list.toArray(array);
-			if(size == 0){
+			String json = submit();
+			
+			if(json.equals("")||json == null){
 				Toast.makeText(this, "未找到相关用户", Toast.LENGTH_SHORT).show();
 			}else {
 				Intent intent = new Intent(this,Friend_Add_Result.class);
-				Bundle bundle = new Bundle();
-				bundle.putStringArray("id", array);
-				intent.putExtras(bundle);
+				intent.putExtra("json", json);
 				startActivity(intent);
 				finish();
 			}
@@ -68,6 +70,33 @@ public class Friend_Add_Condition extends Activity{
 		gender = (RadioGroup)findViewById(R.id.gender);
 		location = (Spinner)findViewById(R.id.location);
 	}
-	//获取数据
+	
+	private UrlEncodedFormEntity makeEntity(){
+		
+		RadioButton rButton = (RadioButton)findViewById(gender.getCheckedRadioButtonId());
+		
+		list = new ArrayList<NameValuePair>();
+		list.add(new BasicNameValuePair("userAge", age.getText().toString()));
+		list.add(new BasicNameValuePair("userSex",rButton.getText().toString()));
+		list.add(new BasicNameValuePair("userPlace", location.getSelectedItem().toString()));
 
+		
+		try{
+			return new UrlEncodedFormEntity(list,HTTP.UTF_8);
+		}catch(UnsupportedEncodingException e){
+			e.printStackTrace();
+		}
+		return null;
+		
+	}
+	private String submit(){
+		String url = HttpUtil.BASE_URL+"servlet/selectFBConServlet";
+		
+		HttpPost request = HttpUtil.getHttpPost(url);
+		request.setEntity(makeEntity());
+		
+		String result= HttpUtil.queryStringForPost(request);
+		return result;
+	}
+	
 }

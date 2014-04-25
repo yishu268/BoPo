@@ -11,7 +11,6 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
 
 import ruanko.model.bopo.Info_Data;
-import ruanko.service.bopo.Service_User;
 import ruanko.util.bopo.HttpUtil;
 import android.app.Activity;
 import android.os.Bundle;
@@ -37,7 +36,7 @@ public class Register extends Activity{
 	private ImageView error_1 = null;
 	private ImageView error_2 = null;
 	
-	private Service_User service_User = null;
+	//private Service_User service_User = null;
 	
 	private List<NameValuePair> list = null;
 	
@@ -46,7 +45,7 @@ public class Register extends Activity{
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.register);
-		service_User = new Service_User(this);
+		//service_User = new Service_User(this);
 		init();
 	}
 	//返回按钮点击事件
@@ -144,8 +143,10 @@ public class Register extends Activity{
 			@Override
 			public void afterTextChanged(Editable s) {
 				// TODO Auto-generated method stub
-				boolean flag = service_User.check(name.getText().toString());
-				if (flag) {
+				//boolean flag = service_User.check(name.getText().toString());
+				String flag = query(name.getText().toString());
+				//Toast.makeText(Register.this, flag, Toast.LENGTH_SHORT).show();
+				if (Integer.parseInt(flag) > 0) {
 					error_1.setVisibility(View.GONE);
 					register.setEnabled(true);
 				}else {
@@ -240,5 +241,10 @@ public class Register extends Activity{
 		if(result!=null&&result.equals("1"))return true;
 		return false;
 	}
+	private String query(String name){
+		String queryString = "name="+name;
+		String url = HttpUtil.BASE_URL+"servlet/checkUserNameServlet?"+queryString;
+		return HttpUtil.queryStringForPost(url);
+    }
 
 }

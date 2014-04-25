@@ -58,9 +58,8 @@ public class Node_Manage implements Node_ManageDAO{
 				node_Data.setId(cursor.getInt(0));		
 				node_Data.setTitle(cursor.getString(1));
 				node_Data.setType(cursor.getString(2));
-				node_Data.setText(cursor.getString(3));
+				node_Data.setInfo(cursor.getString(3));
 				node_Data.setDate(cursor.getString(4));
-				node_Data.setReview_id(cursor.getString(6));
 			}
 			return node_Data;
 		}else {
@@ -76,11 +75,10 @@ public class Node_Manage implements Node_ManageDAO{
 		SQLiteDatabase db = nHelper.getWritableDatabase();
 		//向个人信息数据库中插入个人信息
 		String sql = "insert into node(title, type, intext, date,"
-				+"userid, reviewid) values "
-				+"(?,?,?,?,?,?)";
+				+"userid) values "
+				+"(?,?,?,?,?)";
 		Object[] params = new Object[]{node_Data.getTitle(),node_Data.getType(),
-				node_Data.getText(),node_Data.getDate(),node_Data.getUser_id(),
-				node_Data.getReview_id()};
+				node_Data.getInfo(),node_Data.getDate(),node_Data.getUser_id()};
 		db.execSQL(sql, params);
 		//关闭数据库
 		db.close();

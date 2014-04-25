@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import ruanko.model.bopo.Info_Data;
-import ruanko.service.bopo.Service_Friend;
-import android.app.Activity;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import ruanko.model.bopo.Data;
+import ruanko.model.bopo.Friend_Data;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -18,20 +20,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 //用户搜索结果界面（Friend_Add_Result）
-public class Friend_Add_Result extends Activity{
+public class Friend_Add_Result extends Bottom{
 
 	//声明ListView
 	private ListView result = null;
 	
-	private String[] id = null;
-	
-	private Service_Friend sFriend = null;
+	private Data data = null;
 	
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.friend_add_result);
-		sFriend = new Service_Friend(this);
+		data = (Data)getApplication();
 		init();
 	}
 	//返回按钮点击事件
@@ -50,35 +50,57 @@ public class Friend_Add_Result extends Activity{
 
 		//给ListView添加监听器
 		result = (ListView)findViewById(R.id.result);
-		if (result == null)
-			return;
+		
 		//第一步：获得数据源（model）
-		//ArrayList<Friend_Info_Data> data = (ArrayList<Friend_Info_Data>)getIntent().getSerializableExtra("name");
 		
-		Bundle bundle = this.getIntent().getExtras();
-		id = bundle.getStringArray("id");
+		Intent intent = getIntent();
+		Bundle bundle = intent.getExtras();
+		String json = bundle.getString("json");
 		
-		if (id == null||id.length == 0) {
+		if (json.equals("")||json == null) {
 			Toast.makeText(this, "未找到符合条件的用户", Toast.LENGTH_SHORT).show();
 		}
-		
-		Info_Data info_Data = new Info_Data();
-		
-		
-		List<HashMap<String, String>> myList = new ArrayList<HashMap<String, String>>();
-		for (int i = 0; i < id.length; i++) {
-			info_Data = sFriend.getId(Integer.valueOf(id[i]).intValue());
-			HashMap<String, String> map = new HashMap<String, String>();
-			map.put("text", info_Data.getName());
-			map.put("textid", String.valueOf(info_Data.getId()));
-			myList.add(map);
+		else {
+			List<Friend_Data> friendList = new ArrayList<Friend_Data>();
+			
+			try {
+				JSONArray array = new JSONArray(json);
+				for (int i = 0; i < array.length(); i++) {
+					Friend_Data friend_Data = new Friend_Data();
+					JSONObject object = array.getJSONObject(i);
+					friend_Data.setFriendid(Integer.parseInt(object.getString("userId")));
+					friend_Data.setName(object.getString("userName"));
+					friend_Data.setImage(object.getString("userHImg"));
+					friendList.add(friend_Data);
+				}
+			} catch (Exception e) {
+				
+				Toast.makeText(this, "1", Toast.LENGTH_SHORT).show();
+			}
+			
+			
+			
+			List<HashMap<String, Object>> myList = new ArrayList<HashMap<String, Object>>();
+			
+			if (friendList != null) {
+				for (int i = 0; i < friendList.size(); i++) {
+					Friend_Data friend_Data = (Friend_Data)friendList.get(i);
+					//info_Data = sFriend.getId(Integer.valueOf(id[i]).intValue());
+					HashMap<String, Object> map = new HashMap<String, Object>();
+					map.put("head", data.getImage()[Integer.parseInt(friend_Data.getImage())]);
+					map.put("text", friend_Data.getName());
+					map.put("textid", String.valueOf(friend_Data.getFriendid()));
+					myList.add(map);
+				}
+			}
+			SimpleAdapter adapter = new SimpleAdapter(this, 
+					myList, //数据来源
+					R.layout.friend_list_item, //ListView的XML实现
+					new String[]{"head","text","textid"}, //动态数组与name对应的子项
+					new int[]{R.id.head,R.id.text,R.id.textid});
+			result.setAdapter(adapter);
 		}
-		SimpleAdapter adapter = new SimpleAdapter(this, 
-				myList, //数据来源
-				R.layout.friend_list_item, //ListView的XML实现
-				new String[]{"text","textid"}, //动态数组与name对应的子项
-				new int[]{R.id.text,R.id.textid});
-		result.setAdapter(adapter);
+
 		//为ListView添加点击事件
 		result.setOnItemClickListener(new OnItemClickListener() {
 
@@ -87,8 +109,9 @@ public class Friend_Add_Result extends Activity{
 					long arg3) {
 				TextView text = (TextView)arg1.findViewById(R.id.textid);
 				String name = text.getText().toString();
-				int name_id = Integer.valueOf(name).intValue(); 
-			    //Toast.makeText(Friend_Add_Result.this, name, Toast.LENGTH_SHORT).show();
+				
+				int name_id = Integer.valueOf(name).intValue();
+				
 				//将id传递到info
 				Intent intent = new Intent(Friend_Add_Result.this,Friend_Info.class);
 				Bundle bundle = new Bundle();

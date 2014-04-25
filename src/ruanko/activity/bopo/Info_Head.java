@@ -5,7 +5,6 @@ import java.util.HashMap;
 
 import ruanko.model.bopo.Data;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -15,14 +14,14 @@ import android.widget.GridView;
 import android.widget.SimpleAdapter;
 
 //头像选择界面（Info_Head）
-public class Info_Head extends Activity{
+public class Info_Head extends Bottom{
 	//声明控件
 	private GridView head = null;
 
 	private Data data = null;
 	
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.info_head);
 		data = (Data)getApplication();

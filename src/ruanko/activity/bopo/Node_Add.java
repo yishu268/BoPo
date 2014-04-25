@@ -4,7 +4,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.View;
@@ -13,7 +12,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 
 //成长信息添加界面（Node_Add）
-public class Node_Add extends Activity{
+public class Node_Add extends Bottom{
 
 	private Button date = null;
 	
@@ -24,7 +23,7 @@ public class Node_Add extends Activity{
 	//private Data data;
 	
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.node_add);
